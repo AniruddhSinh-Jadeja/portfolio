@@ -1,435 +1,545 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AniruddhSinh J | Technical Lead</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AniruddhSinh J | Technical Lead</title>
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-  background: #0b0f19;
-  color: #e6edf3;
-  line-height: 1.6;
-}
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+			background: #0b0f19;
+			color: #e6edf3;
+			line-height: 1.6;
+		}
 
-/* NAVBAR */
-nav {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid #1f2937;
-  z-index: 1000;
-}
+		/* NAVBAR */
+		nav {
+			position: fixed;
+			width: 100%;
+			top: 0;
+			background: rgba(15, 23, 42, 0.7);
+			backdrop-filter: blur(12px);
+			border-bottom: 1px solid #1f2937;
+			z-index: 1000;
+		}
 
-.nav-container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-}
+		.nav-container {
+			max-width: 1100px;
+			margin: auto;
+			padding: 15px 20px;
+			display: flex;
+			justify-content: space-between;
+		}
 
-nav a {
-  color: #cbd5e1;
-  margin-left: 20px;
-  text-decoration: none;
-  transition: 0.3s;
-}
+		nav a {
+			color: #cbd5e1;
+			margin-left: 20px;
+			text-decoration: none;
+			transition: 0.3s;
+		}
 
-nav a:hover {
-  color: #38bdf8;
-}
+		nav a:hover {
+			color: #38bdf8;
+		}
 
-/* HERO */
-.hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
-}
+		/* HERO */
+		.hero {
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			padding: 20px;
+		}
 
-.hero h1 {
-  font-size: 48px;
-  margin-bottom: 10px;
-}
+		.hero h1 {
+			font-size: 48px;
+			margin-bottom: 10px;
+		}
 
-.hero p {
-  color: #94a3b8;
-  max-width: 600px;
-  margin: auto;
-}
+		.hero p {
+			color: #94a3b8;
+			max-width: 600px;
+			margin: auto;
+		}
 
-.btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 24px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #38bdf8, #6366f1);
-  color: white;
-  text-decoration: none;
-  transition: 0.3s;
-}
+		.btn {
+			display: inline-block;
+			margin-top: 20px;
+			padding: 12px 24px;
+			border-radius: 8px;
+			background: linear-gradient(135deg, #38bdf8, #6366f1);
+			color: white;
+			text-decoration: none;
+			transition: 0.3s;
+		}
 
-.btn:hover {
-  transform: translateY(-2px);
-}
+		.btn:hover {
+			transform: translateY(-2px);
+		}
 
-/* SECTION */
-section {
-  max-width: 1100px;
-  margin: auto;
-  padding: 80px 20px;
-}
+		/* SECTION */
+		section {
+			max-width: 1100px;
+			margin: auto;
+			padding: 80px 20px;
+		}
 
-h2 {
-  font-size: 28px;
-  margin-bottom: 30px;
-}
+		h2 {
+			font-size: 28px;
+			margin-bottom: 30px;
+		}
 
-/* CARDS */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
+		/* CARDS */
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+			gap: 20px;
+		}
 
-.card {
-  background: rgba(30, 41, 59, 0.6);
-  border: 1px solid #1f2937;
-  padding: 20px;
-  border-radius: 12px;
-  transition: 0.3s;
-}
+		.card {
+			background: rgba(30, 41, 59, 0.6);
+			border: 1px solid #1f2937;
+			padding: 20px;
+			border-radius: 12px;
+			transition: 0.3s;
+		}
 
-.card:hover {
-  transform: translateY(-5px);
-  border-color: #38bdf8;
-}
+		.card:hover {
+			transform: translateY(-5px);
+			border-color: #38bdf8;
+		}
 
-/* METRICS */
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
-}
+		/* METRICS */
+		.metrics {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			gap: 20px;
+		}
 
-.metric {
-  text-align: center;
-  background: #111827;
-  padding: 20px;
-  border-radius: 10px;
-}
+		.metric {
+			text-align: center;
+			background: #111827;
+			padding: 20px;
+			border-radius: 10px;
+		}
 
-.metric h3 {
-  color: #38bdf8;
-  font-size: 28px;
-}
+		.metric h3 {
+			color: #38bdf8;
+			font-size: 28px;
+		}
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 40px;
-  color: #94a3b8;
-}
-</style>
+		/* FOOTER */
+		footer {
+			text-align: center;
+			padding: 40px;
+			color: #94a3b8;
+		}
+
+		#particles {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 0;
+		}
+
+		.hero-content {
+			position: relative;
+			z-index: 1;
+		}
+	</style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav>
-  <div class="nav-container">
-    <strong>AniruddhSinh</strong>
-    <div>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#impact">Impact</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
-</nav>
+	<!-- NAVBAR -->
+	<nav>
+		<div class="nav-container">
+			<strong>AniruddhSinh</strong>
+			<div>
+				<a href="#about">About</a>
+				<a href="#projects">Projects</a>
+				<a href="#impact">Impact</a>
+				<a href="#contact">Contact</a>
+			</div>
+		</div>
+	</nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-content">
+	<!-- HERO -->
+	<div class="hero">
 
-    <!-- NAME / ROLE -->
-    <h1>
-      Backend Architect <span>&</span> Technical Lead
-    </h1>
+		<!-- PARTICLE CANVAS -->
+		<canvas id="particles"></canvas>
+		<div class="hero-content">
 
-    <!-- TAGLINE -->
-    <p class="hero-subtitle">
-      Designing scalable backend systems powering fintech, OTT, and IoT platforms.
-    </p>
+			<!-- NAME / ROLE -->
+			<h1>
+				Backend Architect <span>&</span> Technical Lead
+			</h1>
 
-    <!-- VALUE STATEMENT -->
-    <p class="hero-desc">
-      9+ years of experience in building high-performance APIs, microservices architecture, 
-      and leading engineering teams to deliver production-grade solutions.
-    </p>
+			<!-- TAGLINE -->
+			<p class="hero-subtitle">
+				Designing scalable backend systems powering fintech, OTT, and IoT platforms.
+			</p>
 
-    <!-- CTA -->
-    <div class="hero-buttons">
-      <a href="#projects" class="btn primary">View Projects</a>
-      <a href="#contact" class="btn secondary">Contact Me</a>
-    </div>
+			<!-- VALUE STATEMENT -->
+			<p class="hero-desc">
+				9+ years of experience in building high-performance APIs, microservices architecture,
+				and leading engineering teams to deliver production-grade solutions.
+			</p>
 
-    <!-- TECH TAGS -->
-    <div class="hero-tags">
-      <span>PHP</span>
-      <span>Laravel</span>
-      <span>Microservices</span>
-      <span>REST APIs</span>
-      <span>System Design</span>
-    </div>
+			<!-- CTA -->
+			<div class="hero-buttons">
+				<a href="#projects" class="btn primary">View Projects</a>
+				<a href="#contact" class="btn secondary">Contact Me</a>
+			</div>
 
-  </div>
-</div>
+			<!-- TECH TAGS -->
+			<div class="hero-tags">
+				<span>PHP</span>
+				<span>Laravel</span>
+				<span>Microservices</span>
+				<span>REST APIs</span>
+				<span>System Design</span>
+			</div>
 
-<!-- ABOUT -->
-<section id="about" class="fade">
-  <h2>About</h2>
+		</div>
+	</div>
 
-  <p>
-    Technical Lead with 9+ years of experience in designing and building scalable backend systems 
-    across fintech, OTT, IoT, and marketplace domains. I specialize in PHP, Laravel, and 
-    microservices architecture, focusing on performance, reliability, and clean system design.
-  </p>
+	<!-- ABOUT -->
+	<section id="about" class="fade">
+		<h2>About</h2>
 
-  <p style="margin-top:15px;">
-    Currently leading a team of engineers, I drive end-to-end development — from requirement 
-    analysis and system architecture to delivery and optimization. I work closely with clients 
-    to translate business needs into scalable technical solutions while ensuring high code quality 
-    and engineering standards.
-  </p>
+		<p>
+			Technical Lead with 9+ years of experience in designing and building scalable backend systems
+			across fintech, OTT, IoT, and marketplace domains. I specialize in PHP, Laravel, and
+			microservices architecture, focusing on performance, reliability, and clean system design.
+		</p>
 
-  <p style="margin-top:15px;">
-    My expertise includes REST API design, payment integrations, real-time systems, and 
-    performance optimization for high-traffic applications.
-  </p>
+		<p style="margin-top:15px;">
+			Currently leading a team of engineers, I drive end-to-end development — from requirement
+			analysis and system architecture to delivery and optimization. I work closely with clients
+			to translate business needs into scalable technical solutions while ensuring high code quality
+			and engineering standards.
+		</p>
 
-  <!-- METRICS -->
-  <div class="metrics" style="margin-top:40px;">
+		<p style="margin-top:15px;">
+			My expertise includes REST API design, payment integrations, real-time systems, and
+			performance optimization for high-traffic applications.
+		</p>
 
-    <div class="metric">
-      <h3>9+</h3>
-      <p>Years Experience</p>
-    </div>
+		<!-- METRICS -->
+		<div class="metrics" style="margin-top:40px;">
 
-    <div class="metric">
-      <h3>20+</h3>
-      <p>Projects Delivered</p>
-    </div>
+			<div class="metric">
+				<h3>9+</h3>
+				<p>Years Experience</p>
+			</div>
 
-    <div class="metric">
-      <h3>9</h3>
-      <p>Engineers Led</p>
-    </div>
+			<div class="metric">
+				<h3>20+</h3>
+				<p>Projects Delivered</p>
+			</div>
 
-    <div class="metric">
-      <h3>5+</h3>
-      <p>Domains Worked</p>
-    </div>
+			<div class="metric">
+				<h3>9</h3>
+				<p>Engineers Led</p>
+			</div>
 
-  </div>
+			<div class="metric">
+				<h3>5+</h3>
+				<p>Domains Worked</p>
+			</div>
 
-  <!-- HIGHLIGHTS -->
-  <div class="grid" style="margin-top:40px;">
+		</div>
 
-    <div class="card">
-      <h3>⚡ Backend Expertise</h3>
-      <p>Laravel, PHP, Lumen, REST APIs, Microservices architecture</p>
-    </div>
+		<!-- HIGHLIGHTS -->
+		<div class="grid" style="margin-top:40px;">
 
-    <div class="card">
-      <h3>🔗 Integrations</h3>
-      <p>Stripe, PayPal, Firebase, Agora, Pusher, Authorize.Net</p>
-    </div>
+			<div class="card">
+				<h3>⚡ Backend Expertise</h3>
+				<p>Laravel, PHP, Lumen, REST APIs, Microservices architecture</p>
+			</div>
 
-    <div class="card">
-      <h3>🧠 Architecture</h3>
-      <p>Scalable system design, modular architecture, performance optimization</p>
-    </div>
+			<div class="card">
+				<h3>🔗 Integrations</h3>
+				<p>Stripe, PayPal, Firebase, Agora, Pusher, Authorize.Net</p>
+			</div>
 
-    <div class="card">
-      <h3>👨‍💼 Leadership</h3>
-      <p>Team mentoring, code reviews, sprint planning, client communication</p>
-    </div>
+			<div class="card">
+				<h3>🧠 Architecture</h3>
+				<p>Scalable system design, modular architecture, performance optimization</p>
+			</div>
 
-  </div>
-</section>
+			<div class="card">
+				<h3>👨‍💼 Leadership</h3>
+				<p>Team mentoring, code reviews, sprint planning, client communication</p>
+			</div>
 
-<!-- PROJECTS -->
-<section id="projects" class="fade">
-  <h2>Case Studies</h2>
+		</div>
+	</section>
 
-  <div class="grid">
+	<!-- PROJECTS -->
+	<section id="projects" class="fade">
+		<h2>Case Studies</h2>
 
-    <!-- Beauty Marketplace -->
-    <div class="card">
-      <h3>Beauty Marketplace Platform</h3>
-      <p><b>Problem:</b> Service providers lacked a unified platform for bookings, promotions, and customer management.</p>
-      <p><b>Solution:</b> Built a Laravel-based marketplace with real-time booking, admin dashboard, and secure payment integration.</p>
-      <p><b>Impact:</b> Streamlined appointment handling and improved user experience for both vendors and customers.</p>
-      <p><b>Tech:</b> Laravel, MySQL, Mobile Apps</p>
-    </div>
+		<div class="grid">
 
-    <!-- Payment App -->
-    <div class="card">
-      <h3>Global Payment Transfer App</h3>
-      <p><b>Problem:</b> Complex and insecure international money transfers.</p>
-      <p><b>Solution:</b> Developed a wallet-based system with secure transactions and multi-payment integrations.</p>
-      <p><b>Impact:</b> Enabled seamless domestic & international transfers with improved reliability.</p>
-      <p><b>Tech:</b> Core PHP, Authorize.Net, Firebase</p>
-    </div>
+			<!-- Beauty Marketplace -->
+			<div class="card">
+				<h3>Beauty Marketplace Platform</h3>
+				<p><b>Problem:</b> Service providers lacked a unified platform for bookings, promotions, and customer
+					management.</p>
+				<p><b>Solution:</b> Built a Laravel-based marketplace with real-time booking, admin dashboard, and
+					secure
+					payment integration.</p>
+				<p><b>Impact:</b> Streamlined appointment handling and improved user experience for both vendors and
+					customers.
+				</p>
+				<p><b>Tech:</b> Laravel, MySQL, Mobile Apps</p>
+			</div>
 
-    <!-- Smart Ring -->
-    <div class="card">
-      <h3>Smart Ring Health Platform</h3>
-      <p><b>Problem:</b> Real-time health data tracking and synchronization challenges.</p>
-      <p><b>Solution:</b> Designed APIs for wearable integration handling heart rate, sleep & activity tracking.</p>
-      <p><b>Impact:</b> Delivered accurate real-time insights improving user health monitoring experience.</p>
-      <p><b>Tech:</b> Laravel, IoT Integration</p>
-    </div>
+			<!-- Payment App -->
+			<div class="card">
+				<h3>Global Payment Transfer App</h3>
+				<p><b>Problem:</b> Complex and insecure international money transfers.</p>
+				<p><b>Solution:</b> Developed a wallet-based system with secure transactions and multi-payment
+					integrations.</p>
+				<p><b>Impact:</b> Enabled seamless domestic & international transfers with improved reliability.</p>
+				<p><b>Tech:</b> Core PHP, Authorize.Net, Firebase</p>
+			</div>
 
-    <!-- OTT -->
-    <div class="card">
-      <h3>OTT Streaming Platform</h3>
-      <p><b>Problem:</b> High concurrency streaming with live events and global users.</p>
-      <p><b>Solution:</b> Built scalable backend with live streaming, chat, and subscription payments.</p>
-      <p><b>Impact:</b> Delivered smooth streaming experience with global accessibility.</p>
-      <p><b>Tech:</b> Laravel, Stripe, PayPal, Pusher</p>
-    </div>
+			<!-- Smart Ring -->
+			<div class="card">
+				<h3>Smart Ring Health Platform</h3>
+				<p><b>Problem:</b> Real-time health data tracking and synchronization challenges.</p>
+				<p><b>Solution:</b> Designed APIs for wearable integration handling heart rate, sleep & activity
+					tracking.</p>
+				<p><b>Impact:</b> Delivered accurate real-time insights improving user health monitoring experience.</p>
+				<p><b>Tech:</b> Laravel, IoT Integration</p>
+			</div>
 
-    <!-- Service Platform -->
-    <div class="card">
-      <h3>On-Demand Service Platform</h3>
-      <p><b>Problem:</b> Difficulty finding trusted local service providers.</p>
-      <p><b>Solution:</b> Created a platform connecting users with verified professionals and real-time chat.</p>
-      <p><b>Impact:</b> Faster service discovery and improved service efficiency.</p>
-      <p><b>Tech:</b> CodeIgniter, Firebase</p>
-    </div>
+			<!-- OTT -->
+			<div class="card">
+				<h3>OTT Streaming Platform</h3>
+				<p><b>Problem:</b> High concurrency streaming with live events and global users.</p>
+				<p><b>Solution:</b> Built scalable backend with live streaming, chat, and subscription payments.</p>
+				<p><b>Impact:</b> Delivered smooth streaming experience with global accessibility.</p>
+				<p><b>Tech:</b> Laravel, Stripe, PayPal, Pusher</p>
+			</div>
 
-    <!-- Dating -->
-    <div class="card">
-      <h3>Global Dating Platform</h3>
-      <p><b>Problem:</b> Limited global connectivity for users seeking relationships.</p>
-      <p><b>Solution:</b> Developed scalable platform enabling global user connections.</p>
-      <p><b>Impact:</b> Increased user engagement and cross-region interaction.</p>
-      <p><b>Tech:</b> Laravel</p>
-    </div>
+			<!-- Service Platform -->
+			<div class="card">
+				<h3>On-Demand Service Platform</h3>
+				<p><b>Problem:</b> Difficulty finding trusted local service providers.</p>
+				<p><b>Solution:</b> Created a platform connecting users with verified professionals and real-time chat.
+				</p>
+				<p><b>Impact:</b> Faster service discovery and improved service efficiency.</p>
+				<p><b>Tech:</b> CodeIgniter, Firebase</p>
+			</div>
 
-    <!-- E-commerce -->
-    <div class="card">
-      <h3>Multivendor E-commerce</h3>
-      <p><b>Problem:</b> Managing multiple vendors and product lifecycle.</p>
-      <p><b>Solution:</b> Designed vendor-based architecture with order lifecycle and payment integration.</p>
-      <p><b>Impact:</b> Scalable marketplace supporting multiple vendors and transactions.</p>
-      <p><b>Tech:</b> Laravel, Stripe, PayPal</p>
-    </div>
+			<!-- Dating -->
+			<div class="card">
+				<h3>Global Dating Platform</h3>
+				<p><b>Problem:</b> Limited global connectivity for users seeking relationships.</p>
+				<p><b>Solution:</b> Developed scalable platform enabling global user connections.</p>
+				<p><b>Impact:</b> Increased user engagement and cross-region interaction.</p>
+				<p><b>Tech:</b> Laravel</p>
+			</div>
 
-    <!-- Car Wash -->
-    <div class="card">
-      <h3>Car Wash Management System</h3>
-      <p><b>Problem:</b> Inefficient booking and service coordination.</p>
-      <p><b>Solution:</b> Built slot-based booking and service tracking system.</p>
-      <p><b>Impact:</b> Improved scheduling and service delivery efficiency.</p>
-      <p><b>Tech:</b> Laravel</p>
-    </div>
+			<!-- E-commerce -->
+			<div class="card">
+				<h3>Multivendor E-commerce</h3>
+				<p><b>Problem:</b> Managing multiple vendors and product lifecycle.</p>
+				<p><b>Solution:</b> Designed vendor-based architecture with order lifecycle and payment integration.</p>
+				<p><b>Impact:</b> Scalable marketplace supporting multiple vendors and transactions.</p>
+				<p><b>Tech:</b> Laravel, Stripe, PayPal</p>
+			</div>
 
-    <!-- Healthcare -->
-    <div class="card">
-      <h3>Healthcare Consultation Platform</h3>
-      <p><b>Problem:</b> Limited access to professional counselors remotely.</p>
-      <p><b>Solution:</b> Developed video consultation and booking system.</p>
-      <p><b>Impact:</b> Enabled remote healthcare accessibility.</p>
-      <p><b>Tech:</b> Laravel</p>
-    </div>
+			<!-- Car Wash -->
+			<div class="card">
+				<h3>Car Wash Management System</h3>
+				<p><b>Problem:</b> Inefficient booking and service coordination.</p>
+				<p><b>Solution:</b> Built slot-based booking and service tracking system.</p>
+				<p><b>Impact:</b> Improved scheduling and service delivery efficiency.</p>
+				<p><b>Tech:</b> Laravel</p>
+			</div>
 
-    <!-- Social Network -->
-    <div class="card">
-      <h3>Business Networking Platform</h3>
-      <p><b>Problem:</b> Lack of platform for startups to connect with investors.</p>
-      <p><b>Solution:</b> Built networking platform for entrepreneurs and investors.</p>
-      <p><b>Impact:</b> Helped businesses build partnerships and grow.</p>
-      <p><b>Tech:</b> Laravel</p>
-    </div>
+			<!-- Healthcare -->
+			<div class="card">
+				<h3>Healthcare Consultation Platform</h3>
+				<p><b>Problem:</b> Limited access to professional counselors remotely.</p>
+				<p><b>Solution:</b> Developed video consultation and booking system.</p>
+				<p><b>Impact:</b> Enabled remote healthcare accessibility.</p>
+				<p><b>Tech:</b> Laravel</p>
+			</div>
 
-  </div>
-</section>
+			<!-- Social Network -->
+			<div class="card">
+				<h3>Business Networking Platform</h3>
+				<p><b>Problem:</b> Lack of platform for startups to connect with investors.</p>
+				<p><b>Solution:</b> Built networking platform for entrepreneurs and investors.</p>
+				<p><b>Impact:</b> Helped businesses build partnerships and grow.</p>
+				<p><b>Tech:</b> Laravel</p>
+			</div>
 
-<!-- IMPACT -->
-<section id="impact" class="fade">
-  <h2>Leadership & Impact</h2>
+		</div>
+	</section>
 
-  <div class="grid">
+	<!-- IMPACT -->
+	<section id="impact" class="fade">
+		<h2>Leadership & Impact</h2>
 
-    <div class="card">
-      <h3>👨‍💻 Team Leadership</h3>
-      <p>Lead and mentored a team of 9 developers across multiple projects.</p>
-      <ul>
-        <li>Conducted code reviews and ensured best practices</li>
-        <li>Improved team productivity and delivery timelines</li>
-        <li>Guided junior developers into mid-level engineers</li>
-      </ul>
-    </div>
+		<div class="grid">
 
-    <div class="card">
-      <h3>⚡ Scalability & Performance</h3>
-      <p>Enhanced backend systems to handle high traffic and real-time data.</p>
-      <ul>
-        <li>Optimized APIs and database queries</li>
-        <li>Reduced latency and improved response time</li>
-        <li>Designed scalable architecture for growth</li>
-      </ul>
-    </div>
+			<div class="card">
+				<h3>👨‍💻 Team Leadership</h3>
+				<p>Lead and mentored a team of 9 developers across multiple projects.</p>
+				<ul>
+					<li>Conducted code reviews and ensured best practices</li>
+					<li>Improved team productivity and delivery timelines</li>
+					<li>Guided junior developers into mid-level engineers</li>
+				</ul>
+			</div>
 
-    <div class="card">
-      <h3>🏗️ Architecture & Standards</h3>
-      <p>Established strong engineering practices across projects.</p>
-      <ul>
-        <li>Defined coding standards and Git strategies</li>
-        <li>Implemented modular & microservices architecture</li>
-        <li>Ensured maintainability and clean code structure</li>
-      </ul>
-    </div>
+			<div class="card">
+				<h3>⚡ Scalability & Performance</h3>
+				<p>Enhanced backend systems to handle high traffic and real-time data.</p>
+				<ul>
+					<li>Optimized APIs and database queries</li>
+					<li>Reduced latency and improved response time</li>
+					<li>Designed scalable architecture for growth</li>
+				</ul>
+			</div>
 
-    <div class="card">
-      <h3>🤝 Client & Product Ownership</h3>
-      <p>Worked directly with clients to deliver business-focused solutions.</p>
-      <ul>
-        <li>Gathered and refined requirements</li>
-        <li>Translated business needs into technical solutions</li>
-        <li>Ensured on-time project delivery</li>
-      </ul>
-    </div>
+			<div class="card">
+				<h3>🏗️ Architecture & Standards</h3>
+				<p>Established strong engineering practices across projects.</p>
+				<ul>
+					<li>Defined coding standards and Git strategies</li>
+					<li>Implemented modular & microservices architecture</li>
+					<li>Ensured maintainability and clean code structure</li>
+				</ul>
+			</div>
 
-  </div>
-</section>
+			<div class="card">
+				<h3>🤝 Client & Product Ownership</h3>
+				<p>Worked directly with clients to deliver business-focused solutions.</p>
+				<ul>
+					<li>Gathered and refined requirements</li>
+					<li>Translated business needs into technical solutions</li>
+					<li>Ensured on-time project delivery</li>
+				</ul>
+			</div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Email: jadejaaniruddhsinh5456@gmail.com</p>
-  <p>Phone: +91 90339 15456</p>
-  <p>LinkedIn: Add your link</p>
-</section>
+		</div>
+	</section>
 
-<footer>
-  © 2026 AniruddhSinh J
-</footer>
+	<!-- CONTACT -->
+	<section id="contact">
+		<h2>Contact</h2>
+		<p>Email: jadejaaniruddhsinh5456@gmail.com</p>
+		<p>Phone: +91 90339 15456</p>
+		<p>LinkedIn: Add your link</p>
+	</section>
+
+	<footer>
+		© 2026 AniruddhSinh J
+	</footer>
+
+	<script>
+		const canvas = document.getElementById("particles");
+		const ctx = canvas.getContext("2d");
+
+		let particlesArray = [];
+
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+
+		window.addEventListener("resize", () => {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+		});
+
+		class Particle {
+			constructor() {
+				this.x = Math.random() * canvas.width;
+				this.y = Math.random() * canvas.height;
+				this.size = Math.random() * 2 + 1;
+				this.speedX = Math.random() * 0.5 - 0.25;
+				this.speedY = Math.random() * 0.5 - 0.25;
+			}
+
+			update() {
+				this.x += this.speedX;
+				this.y += this.speedY;
+
+				if (this.x > canvas.width) this.x = 0;
+				if (this.x < 0) this.x = canvas.width;
+				if (this.y > canvas.height) this.y = 0;
+				if (this.y < 0) this.y = canvas.height;
+			}
+
+			draw() {
+				ctx.fillStyle = "#38bdf8";
+				ctx.beginPath();
+				ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+				ctx.fill();
+			}
+		}
+
+		function init() {
+			particlesArray = [];
+			for (let i = 0; i < 80; i++) {
+				particlesArray.push(new Particle());
+			}
+		}
+
+		function connect() {
+			for (let a = 0; a < particlesArray.length; a++) {
+				for (let b = a; b < particlesArray.length; b++) {
+					let dx = particlesArray[a].x - particlesArray[b].x;
+					let dy = particlesArray[a].y - particlesArray[b].y;
+					let distance = dx * dx + dy * dy;
+
+					if (distance < 10000) {
+						ctx.strokeStyle = "rgba(56,189,248,0.1)";
+						ctx.lineWidth = 1;
+						ctx.beginPath();
+						ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+						ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+						ctx.stroke();
+					}
+				}
+			}
+		}
+
+		function animate() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			for (let i = 0; i < particlesArray.length; i++) {
+				particlesArray[i].update();
+				particlesArray[i].draw();
+			}
+
+			connect();
+			requestAnimationFrame(animate);
+		}
+
+		init();
+		animate();
+	</script>
 
 </body>
+
 </html>
