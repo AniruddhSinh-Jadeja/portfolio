@@ -144,18 +144,83 @@
 			color: #94a3b8;
 		}
 
+		.hero {
+			height: 100vh;
+			position: relative;
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+		}
+
+		/* PARTICLES */
 		#particles {
 			position: absolute;
 			width: 100%;
 			height: 100%;
-			top: 0;
-			left: 0;
 			z-index: 0;
 		}
 
+		/* GLOW EFFECT */
+		.hero-glow {
+			position: absolute;
+			width: 600px;
+			height: 600px;
+			background: radial-gradient(circle, rgba(56, 189, 248, 0.25), transparent);
+			top: 30%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			filter: blur(100px);
+			z-index: 0;
+		}
+
+		/* CONTENT */
 		.hero-content {
 			position: relative;
-			z-index: 1;
+			z-index: 2;
+			max-width: 800px;
+		}
+
+		/* TITLE */
+		.hero h1 {
+			font-size: 60px;
+			font-weight: 700;
+			margin-bottom: 20px;
+		}
+
+		/* TEXT */
+		.hero-subtitle {
+			color: #38bdf8;
+			margin-bottom: 10px;
+		}
+
+		.hero-desc {
+			color: #94a3b8;
+			margin-bottom: 25px;
+		}
+
+		/* BUTTONS */
+		.btn {
+			padding: 12px 24px;
+			border-radius: 8px;
+			margin: 5px;
+			text-decoration: none;
+			transition: 0.3s;
+		}
+
+		.btn.primary {
+			background: linear-gradient(135deg, #38bdf8, #6366f1);
+			color: white;
+		}
+
+		.btn.secondary {
+			border: 1px solid #334155;
+			color: #cbd5e1;
+		}
+
+		.btn:hover {
+			transform: translateY(-3px);
 		}
 	</style>
 </head>
@@ -178,39 +243,29 @@
 	<!-- HERO -->
 	<div class="hero">
 
-		<!-- PARTICLE CANVAS -->
 		<canvas id="particles"></canvas>
+
+		<!-- GLOW -->
+		<div class="hero-glow"></div>
+
 		<div class="hero-content">
 
-			<!-- NAME / ROLE -->
 			<h1>
-				Backend Architect <span>&</span> Technical Lead
+				<span id="typing"></span>
 			</h1>
 
-			<!-- TAGLINE -->
 			<p class="hero-subtitle">
 				Designing scalable backend systems powering fintech, OTT, and IoT platforms.
 			</p>
 
-			<!-- VALUE STATEMENT -->
 			<p class="hero-desc">
 				9+ years of experience in building high-performance APIs, microservices architecture,
 				and leading engineering teams to deliver production-grade solutions.
 			</p>
 
-			<!-- CTA -->
 			<div class="hero-buttons">
 				<a href="#projects" class="btn primary">View Projects</a>
 				<a href="#contact" class="btn secondary">Contact Me</a>
-			</div>
-
-			<!-- TECH TAGS -->
-			<div class="hero-tags">
-				<span>PHP</span>
-				<span>Laravel</span>
-				<span>Microservices</span>
-				<span>REST APIs</span>
-				<span>System Design</span>
 			</div>
 
 		</div>
@@ -456,19 +511,61 @@
 	<footer>
 		© 2026 AniruddhSinh J
 	</footer>
+	<script>
+		const roles = [
+			"Backend Architect",
+			"Technical Lead",
+			"System Design Expert"
+		];
 
+		let i = 0,
+			j = 0,
+			current = "",
+			isDeleting = false;
+
+		function type() {
+			current = roles[i];
+
+			if (isDeleting) {
+				j--;
+			} else {
+				j++;
+			}
+
+			document.getElementById("typing").innerHTML = current.substring(0, j);
+
+			if (!isDeleting && j === current.length) {
+				isDeleting = true;
+				setTimeout(type, 1200);
+				return;
+			}
+
+			if (isDeleting && j === 0) {
+				isDeleting = false;
+				i = (i + 1) % roles.length;
+			}
+
+			setTimeout(type, isDeleting ? 50 : 100);
+		}
+
+		type();
+	</script>
 	<script>
 		const canvas = document.getElementById("particles");
 		const ctx = canvas.getContext("2d");
 
-		let particlesArray = [];
+		let particles = [];
+		let mouse = {
+			x: null,
+			y: null
+		};
 
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
 
-		window.addEventListener("resize", () => {
-			canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
+		window.addEventListener("mousemove", e => {
+			mouse.x = e.x;
+			mouse.y = e.y;
 		});
 
 		class Particle {
@@ -484,10 +581,14 @@
 				this.x += this.speedX;
 				this.y += this.speedY;
 
-				if (this.x > canvas.width) this.x = 0;
-				if (this.x < 0) this.x = canvas.width;
-				if (this.y > canvas.height) this.y = 0;
-				if (this.y < 0) this.y = canvas.height;
+				let dx = this.x - mouse.x;
+				let dy = this.y - mouse.y;
+				let dist = Math.sqrt(dx * dx + dy * dy);
+
+				if (dist < 100) {
+					this.x += dx / 10;
+					this.y += dy / 10;
+				}
 			}
 
 			draw() {
@@ -499,25 +600,25 @@
 		}
 
 		function init() {
-			particlesArray = [];
-			for (let i = 0; i < 80; i++) {
-				particlesArray.push(new Particle());
+			particles = [];
+			for (let i = 0; i < 100; i++) {
+				particles.push(new Particle());
 			}
 		}
 
 		function connect() {
-			for (let a = 0; a < particlesArray.length; a++) {
-				for (let b = a; b < particlesArray.length; b++) {
-					let dx = particlesArray[a].x - particlesArray[b].x;
-					let dy = particlesArray[a].y - particlesArray[b].y;
+			for (let a = 0; a < particles.length; a++) {
+				for (let b = a; b < particles.length; b++) {
+					let dx = particles[a].x - particles[b].x;
+					let dy = particles[a].y - particles[b].y;
 					let distance = dx * dx + dy * dy;
 
-					if (distance < 10000) {
-						ctx.strokeStyle = "rgba(56,189,248,0.1)";
+					if (distance < 8000) {
+						ctx.strokeStyle = "rgba(56,189,248,0.08)";
 						ctx.lineWidth = 1;
 						ctx.beginPath();
-						ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-						ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+						ctx.moveTo(particles[a].x, particles[a].y);
+						ctx.lineTo(particles[b].x, particles[b].y);
 						ctx.stroke();
 					}
 				}
@@ -527,10 +628,10 @@
 		function animate() {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-			for (let i = 0; i < particlesArray.length; i++) {
-				particlesArray[i].update();
-				particlesArray[i].draw();
-			}
+			particles.forEach(p => {
+				p.update();
+				p.draw();
+			});
 
 			connect();
 			requestAnimationFrame(animate);
