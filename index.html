@@ -133,7 +133,7 @@
           <div class="text-slate-500 text-[11px] font-medium uppercase tracking-[.8px]">Years Exp.</div>
         </div>
         <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-5 text-center hover:border-sky-400/40 hover:-translate-y-1 transition-all duration-300 cursor-default">
-          <div class="font-mono text-4xl font-bold text-sky-400 leading-none mb-1 tracking-tight counter" data-target="20" data-suffix="+">0</div>
+          <div class="font-mono text-4xl font-bold text-sky-400 leading-none mb-1 tracking-tight counter" data-target="40" data-suffix="+">0</div>
           <div class="text-slate-500 text-[11px] font-medium uppercase tracking-[.8px]">Projects</div>
         </div>
         <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-5 text-center hover:border-sky-400/40 hover:-translate-y-1 transition-all duration-300 cursor-default">
@@ -164,6 +164,7 @@
 
   <span class="c-kw">public</span> <span class="c-cl">array</span> <span class="c-var">$stack</span> = <span class="c-dim">[</span>
     <span class="c-str">'Laravel'</span><span class="c-dim">,</span> <span class="c-str">'PHP'</span><span class="c-dim">,</span> <span class="c-str">'MySQL'</span><span class="c-dim">,</span>
+    <span class="c-str">'Node.js'</span><span class="c-dim">,</span> <span class="c-str">'React.js'</span><span class="c-dim">,</span> <span class="c-str">'Next.js'</span><span class="c-dim">,</span>
     <span class="c-str">'Redis'</span><span class="c-dim">,</span>   <span class="c-str">'Microservices'</span><span class="c-dim">,</span>
   <span class="c-dim">];</span>
 
@@ -234,6 +235,9 @@
       <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">JWT</span>
       <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">OAuth 2.0</span>
       <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">WebSockets</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Node.js</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">React.js</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Next.js</span>
       <!-- duplicate -->
       <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">PHP</span>
       <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Laravel</span>
@@ -253,6 +257,9 @@
       <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">JWT</span>
       <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">OAuth 2.0</span>
       <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">WebSockets</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Node.js</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">React.js</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Next.js</span>
     </div>
   </div>
 </div>
@@ -556,7 +563,22 @@
     </div>
 
     <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-7">
-      <form id="contact-form" onsubmit="sendEmail(event)" novalidate>
+      <form id="contact-form" novalidate>
+        <!-- Web3Forms: get your free key at https://web3forms.com → enter jadejaaniruddhsinh5456@gmail.com -->
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+        <input type="hidden" name="subject" value="New message from portfolio">
+        <input type="hidden" name="from_name" value="Portfolio Contact Form">
+        <div id="form-success" class="hidden text-center py-8">
+          <div class="w-14 h-14 rounded-full bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center mx-auto mb-4">
+            <svg width="24" height="24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h4 class="font-head font-semibold text-lg mb-2">Message sent!</h4>
+          <p class="text-slate-400 text-sm">Thanks for reaching out. I'll get back to you within 24 hours.</p>
+        </div>
+        <div id="form-error" class="hidden mb-4 px-4 py-3 rounded-xl bg-red-400/10 border border-red-400/20 text-red-400 text-sm font-mono">
+          Something went wrong. Please email me directly at jadejaaniruddhsinh5456@gmail.com
+        </div>
+        <div id="form-fields">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-3.5">
           <div>
             <label for="fname" class="block font-mono text-[11px] font-semibold text-slate-500 uppercase tracking-[.8px] mb-1.5">Name</label>
@@ -579,10 +601,11 @@
           <textarea id="fmessage" name="message" placeholder="Tell me about your project..." required rows="5"
             class="w-full bg-[#070c18]/60 border border-white/[.07] rounded-xl px-4 py-2.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-sky-400 focus:shadow-[0_0_0_3px_rgba(56,189,248,.08)] transition-all duration-300 font-body resize-y"></textarea>
         </div>
-        <button type="submit" class="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-sky-400 to-indigo-400 text-white text-sm font-semibold rounded-xl hover:-translate-y-[2px] hover:shadow-[0_8px_28px_rgba(56,189,248,.35)] active:translate-y-0 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-400 focus-visible:outline-offset-2 font-body">
-          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          Send Message
+        <button id="submit-btn" type="submit" class="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-sky-400 to-indigo-400 text-white text-sm font-semibold rounded-xl hover:-translate-y-[2px] hover:shadow-[0_8px_28px_rgba(56,189,248,.35)] active:translate-y-0 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-400 focus-visible:outline-offset-2 font-body disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none">
+          <svg id="btn-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <span id="btn-text">Send Message</span>
         </button>
+        </div><!-- /form-fields -->
       </form>
     </div>
 
