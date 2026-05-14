@@ -50,23 +50,14 @@ nav a.active  { color: #38bdf8 !important; background: rgba(56,189,248,.09) !imp
   background: linear-gradient(to bottom, #38bdf8, rgba(56,189,248,.05));
 }
 
-/* ── Scroll-reveal helpers (JS adds .visible) ── */
-.fade        { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
-.fade.visible{ opacity: 1; transform: translateY(0); }
-
-.card {
-  opacity: 0; transform: translateY(22px);
-  transition:
-    opacity  .5s ease calc(var(--stagger,0) * 70ms),
-    transform .5s ease calc(var(--stagger,0) * 70ms);
-}
-.card.visible {
-  opacity: 1; transform: translateY(0);
-  transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+/* ── Scroll-reveal: JS sets inline opacity/transform/transition (beats Tailwind) ── */
+/* CSS only used as reduced-motion fallback */
+@media (prefers-reduced-motion: reduce) {
+  .fade, .card, .tl-item { opacity: 1 !important; transform: none !important; }
 }
 
-.tl-item { opacity: 0; transform: translateX(-18px); transition: opacity .5s ease, transform .5s ease; }
-.tl-item.visible { opacity: 1; transform: translateX(0); }
+/* Card hover glow — augments Tailwind hover classes */
+.card:hover { box-shadow: 0 0 0 1px rgba(56,189,248,.18), 0 16px 48px rgba(0,0,0,.35), 0 0 40px rgba(56,189,248,.04); }
 
 /* ── Code syntax ── */
 .c-kw  { color:#ff79c6 }
@@ -79,6 +70,14 @@ nav a.active  { color: #38bdf8 !important; background: rgba(56,189,248,.09) !imp
 .c-cmt { color:#6272a4; font-style:italic }
 pre { scrollbar-width:none }
 pre::-webkit-scrollbar { display:none }
+
+/* ── Cursor glow (injected by JS) ── */
+.cursor-glow {
+  position: fixed; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(56,189,248,.055) 0%, transparent 70%);
+  pointer-events: none; z-index: 0; transform: translate(-50%,-50%);
+  mix-blend-mode: screen; left: -999px; top: -999px;
+}
 
 /* ── Prefers-reduced-motion ── */
 @media (prefers-reduced-motion: reduce) {
