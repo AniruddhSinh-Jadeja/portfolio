@@ -1,510 +1,612 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AniruddhSinh Jadeja | Technical Lead</title>
+  <meta name="description" content="Technical Lead with 9+ years building scalable backend systems across fintech, OTT, and IoT platforms.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            head: ["'Space Grotesk'", 'sans-serif'],
+            body: ["'IBM Plex Sans'", 'sans-serif'],
+            mono: ["'JetBrains Mono'", 'monospace'],
+          },
+          keyframes: {
+            fadeInDown:  { from:{opacity:'0',transform:'translateY(-12px)'}, to:{opacity:'1',transform:'translateY(0)'} },
+            fadeInUp:    { from:{opacity:'0',transform:'translateY(18px)'},  to:{opacity:'1',transform:'translateY(0)'} },
+            fadeInLeft:  { from:{opacity:'0',transform:'translateX(-20px)'}, to:{opacity:'1',transform:'translateX(0)'} },
+            fadeInRight: { from:{opacity:'0',transform:'translateX(20px)'},  to:{opacity:'1',transform:'translateX(0)'} },
+            pulseBadge:  { '0%,100%':{opacity:'1',transform:'scale(1)'}, '50%':{opacity:'.5',transform:'scale(1.35)'} },
+          },
+          animation: {
+            'fin-down':  'fadeInDown .55s ease both',
+            'fin-up':    'fadeInUp .55s ease both',
+            'fin-left':  'fadeInLeft .6s ease both',
+            'fin-right': 'fadeInRight .6s ease .2s both',
+            'pulse-dot': 'pulseBadge 2.2s ease infinite',
+          },
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
+<body class="bg-[#070c18] text-slate-100 font-body overflow-x-hidden">
 
-<body>
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400 z-[9999] w-0" style="transition:width .08s linear" role="progressbar" aria-label="Scroll progress"></div>
 
-  <!-- SCROLL PROGRESS -->
-  <div id="scroll-progress"></div>
-
-  <!-- NAVBAR -->
-  <nav id="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-logo">AJ<span>.</span></a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#impact">Impact</a>
-        <a href="#contact">Contact</a>
-      </div>
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed w-full top-[2px] bg-[#070c18]/55 backdrop-blur-2xl border-b border-white/[.07] z-[1000] transition-all duration-300" role="navigation" aria-label="Main navigation">
+  <div class="max-w-[1120px] mx-auto px-6 py-[13px] flex justify-between items-center">
+    <a href="#" class="font-head font-bold text-lg text-slate-100 no-underline tracking-tight" aria-label="Home">AJ<span class="text-sky-400">.</span></a>
+    <div class="nav-links hidden md:flex gap-0.5">
+      <a href="#about"      class="text-slate-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 hover:text-slate-100 hover:bg-white/[.055] focus-visible:outline-2 focus-visible:outline-sky-400 focus-visible:outline-offset-2">About</a>
+      <a href="#projects"   class="text-slate-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 hover:text-slate-100 hover:bg-white/[.055]">Projects</a>
+      <a href="#experience" class="text-slate-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 hover:text-slate-100 hover:bg-white/[.055]">Experience</a>
+      <a href="#impact"     class="text-slate-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 hover:text-slate-100 hover:bg-white/[.055]">Impact</a>
+      <a href="#contact"    class="text-slate-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 hover:text-slate-100 hover:bg-white/[.055]">Contact</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <div class="hero">
-    <canvas id="particles"></canvas>
-    <div class="hero-glow"></div>
+<!-- HERO -->
+<section class="relative h-screen min-h-[640px] flex items-center justify-center text-center px-5 overflow-hidden" role="banner">
+  <canvas id="particles" class="absolute inset-0 z-0" aria-hidden="true"></canvas>
+  <div class="hero-dots absolute inset-0 z-[1] pointer-events-none" aria-hidden="true"></div>
+  <!-- glows -->
+  <div class="absolute w-[580px] h-[580px] rounded-full bg-sky-400/[.13] blur-[70px] top-1/2 left-[40%] -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute w-[460px] h-[460px] rounded-full bg-purple-400/[.09] blur-[90px] top-1/2 left-[58%] -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" aria-hidden="true"></div>
 
-    <div class="hero-content">
-      <div class="hero-badge">Technical Lead &nbsp;·&nbsp; 9+ Years Experience</div>
+  <div class="relative z-[2] max-w-[820px]">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 border border-sky-400/25 bg-sky-400/[.07] text-sky-400 px-[18px] py-[7px] rounded-full font-mono text-xs font-medium tracking-wide mb-7 animate-fin-down">
+      <span class="w-[7px] h-[7px] rounded-full bg-emerald-400 shadow-[0_0_8px_#22c55e] animate-pulse-dot" aria-hidden="true"></span>
+      Available for opportunities
+    </div>
 
-      <h1>
-        <span class="gradient-text">AniruddhSinh</span><br>Jadeja
-      </h1>
+    <!-- Name -->
+    <h1 class="font-head font-bold leading-none tracking-[-2.5px] mb-5" style="font-size:clamp(44px,7.5vw,80px)">
+      <span class="bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent animate-fin-left inline-block">AniruddhSinh</span><br>
+      <span class="animate-fin-right inline-block">Jadeja</span>
+    </h1>
 
-      <div class="hero-role">
-        <span id="typing"></span><span class="cursor"></span>
-      </div>
+    <!-- Typing role -->
+    <div class="font-mono text-sky-400 font-medium min-h-[30px] mb-[18px] animate-fin-up [animation-delay:.3s]" style="font-size:clamp(15px,2.2vw,20px)" aria-live="polite">
+      <span id="typing"></span><span class="cursor" aria-hidden="true"></span>
+    </div>
 
-      <p class="hero-subtitle">
-        Designing scalable backend systems powering fintech, OTT, and IoT platforms.
+    <!-- Subtitle -->
+    <p class="text-slate-400 text-base max-w-[520px] mx-auto mb-9 leading-[1.75] animate-fin-up [animation-delay:.4s]">
+      Designing scalable backend systems powering fintech, OTT, and IoT platforms.
+    </p>
+
+    <!-- Buttons -->
+    <div class="flex gap-3 justify-center flex-wrap animate-fin-up [animation-delay:.5s]">
+      <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-sky-400 to-indigo-400 text-white text-sm font-semibold shadow-[0_0_24px_rgba(56,189,248,.22)] hover:-translate-y-[3px] hover:shadow-[0_0_40px_rgba(56,189,248,.42)] transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-400 focus-visible:outline-offset-2">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        View Projects
+      </a>
+      <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-sky-400/20 text-slate-400 bg-white/[.03] text-sm font-semibold hover:border-sky-400 hover:text-slate-100 hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Get In Touch
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-[2] animate-fin-up [animation-delay:1.4s]" aria-hidden="true">
+    <div class="w-5 h-[33px] border-2 border-slate-400/30 rounded-xl flex justify-center pt-[5px]">
+      <div class="w-[3px] h-[6px] bg-slate-500 rounded-sm scroll-wheel"></div>
+    </div>
+    <span class="font-mono text-[10px] uppercase tracking-[1.5px] text-slate-500">Scroll</span>
+  </div>
+</section>
+
+<div class="aurora"></div>
+
+<!-- ABOUT -->
+<section id="about" class="fade max-w-[1120px] mx-auto px-6 py-24">
+  <!-- Two-column: text + code window -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-14">
+    <div>
+      <p class="font-mono text-[11px] font-semibold tracking-[2.5px] uppercase text-sky-400 mb-3">About Me</p>
+      <h2 class="font-head font-bold tracking-tight leading-[1.1] mb-4" style="font-size:clamp(28px,4.5vw,44px)">Building systems<br>that scale.</h2>
+      <p class="text-slate-400 text-[15px] max-w-[540px] mb-4 leading-[1.75]">
+        Technical Lead with 9+ years designing scalable backend systems across fintech, OTT, IoT, and marketplace domains. Specialized in PHP, Laravel, and microservices — performance, reliability, and clean system design.
+      </p>
+      <p class="text-slate-400 text-sm leading-[1.85] max-w-[520px] mb-10">
+        Currently leading a team of engineers, I drive end-to-end development from architecture to delivery. I translate business needs into scalable technical solutions while ensuring high code quality.
       </p>
 
-      <div class="hero-buttons">
-        <a href="#projects" class="btn primary">View Projects</a>
-        <a href="#contact" class="btn secondary">Contact Me</a>
+      <!-- Metrics -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-5 text-center hover:border-sky-400/40 hover:-translate-y-1 transition-all duration-300 cursor-default">
+          <div class="font-mono text-4xl font-bold text-sky-400 leading-none mb-1 tracking-tight counter" data-target="9" data-suffix="+">0</div>
+          <div class="text-slate-500 text-[11px] font-medium uppercase tracking-[.8px]">Years Exp.</div>
+        </div>
+        <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-5 text-center hover:border-sky-400/40 hover:-translate-y-1 transition-all duration-300 cursor-default">
+          <div class="font-mono text-4xl font-bold text-sky-400 leading-none mb-1 tracking-tight counter" data-target="20" data-suffix="+">0</div>
+          <div class="text-slate-500 text-[11px] font-medium uppercase tracking-[.8px]">Projects</div>
+        </div>
+        <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-5 text-center hover:border-sky-400/40 hover:-translate-y-1 transition-all duration-300 cursor-default">
+          <div class="font-mono text-4xl font-bold text-sky-400 leading-none mb-1 tracking-tight counter" data-target="9">0</div>
+          <div class="text-slate-500 text-[11px] font-medium uppercase tracking-[.8px]">Engineers Led</div>
+        </div>
+        <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-5 text-center hover:border-sky-400/40 hover:-translate-y-1 transition-all duration-300 cursor-default">
+          <div class="font-mono text-4xl font-bold text-sky-400 leading-none mb-1 tracking-tight counter" data-target="5" data-suffix="+">0</div>
+          <div class="text-slate-500 text-[11px] font-medium uppercase tracking-[.8px]">Domains</div>
+        </div>
       </div>
     </div>
 
-    <div class="scroll-indicator">
-      <div class="scroll-mouse">
-        <div class="scroll-wheel"></div>
-      </div>
-      <span>Scroll</span>
-    </div>
-  </div>
+    <!-- PHP Code Window -->
+    <div class="hidden lg:block">
+      <div class="bg-[#0d1117] border border-white/[.08] rounded-2xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,.45)] sticky top-24" role="img" aria-label="PHP class representing professional profile">
+        <div class="flex items-center gap-[7px] px-4 py-3 bg-white/[.02] border-b border-white/[.05]">
+          <span class="w-3 h-3 rounded-full bg-[#ff5f57]" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-[#febc2e]" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-[#28c840]" aria-hidden="true"></span>
+          <span class="font-mono text-xs text-slate-500 ml-2">AniruddhSinh.php</span>
+        </div>
+        <pre class="font-mono text-[13px] leading-[1.8] p-6 overflow-x-auto whitespace-pre"><span class="c-cmt">// Technical Lead · Backend Architect</span>
+<span class="c-kw">class</span> <span class="c-cl">AniruddhSinh</span>
+<span class="c-dim">{</span>
+  <span class="c-kw">public</span> <span class="c-cl">string</span> <span class="c-var">$role</span>       = <span class="c-str">'Technical Lead'</span><span class="c-dim">;</span>
+  <span class="c-kw">public</span> <span class="c-cl">int</span>    <span class="c-var">$experience</span> = <span class="c-num">9</span><span class="c-dim">;</span>
 
-  <!-- ABOUT -->
-  <section id="about" class="fade">
-    <div class="section-label">About Me</div>
-    <h2>Building systems that scale.</h2>
-    <p class="section-desc">
-      Technical Lead with 9+ years of experience in designing and building scalable backend systems
-      across fintech, OTT, IoT, and marketplace domains. I specialize in PHP, Laravel, and
-      microservices architecture — focused on performance, reliability, and clean system design.
-    </p>
+  <span class="c-kw">public</span> <span class="c-cl">array</span> <span class="c-var">$stack</span> = <span class="c-dim">[</span>
+    <span class="c-str">'Laravel'</span><span class="c-dim">,</span> <span class="c-str">'PHP'</span><span class="c-dim">,</span> <span class="c-str">'MySQL'</span><span class="c-dim">,</span>
+    <span class="c-str">'Redis'</span><span class="c-dim">,</span>   <span class="c-str">'Microservices'</span><span class="c-dim">,</span>
+  <span class="c-dim">];</span>
 
-    <p style="color:#94a3b8;font-size:14px;line-height:1.8;max-width:680px;margin-bottom:10px;">
-      Currently leading a team of engineers, I drive end-to-end development — from requirement
-      analysis and system architecture to delivery and optimization. I work closely with clients
-      to translate business needs into scalable technical solutions while ensuring high code quality
-      and engineering standards.
-    </p>
-
-    <!-- METRICS -->
-    <div class="metrics">
-      <div class="metric">
-        <h3 class="counter" data-target="9" data-suffix="+">0</h3>
-        <p>Years Experience</p>
-      </div>
-      <div class="metric">
-        <h3 class="counter" data-target="20" data-suffix="+">0</h3>
-        <p>Projects Delivered</p>
-      </div>
-      <div class="metric">
-        <h3 class="counter" data-target="9">0</h3>
-        <p>Engineers Led</p>
-      </div>
-      <div class="metric">
-        <h3 class="counter" data-target="5" data-suffix="+">0</h3>
-        <p>Domains Worked</p>
-      </div>
-    </div>
-
-    <!-- BENTO GRID -->
-    <div class="bento">
-      <div class="bento-card wide">
-        <span class="bento-icon">⚡</span>
-        <h3>Backend Expertise</h3>
-        <p>Laravel, PHP, Lumen, REST APIs, Microservices architecture — building high-performance, production-grade systems from the ground up.</p>
-      </div>
-      <div class="bento-card">
-        <span class="bento-icon">🔗</span>
-        <h3>Integrations</h3>
-        <p>Stripe, PayPal, Firebase, Agora, Pusher, Authorize.Net and more.</p>
-      </div>
-      <div class="bento-card">
-        <span class="bento-icon">🧠</span>
-        <h3>Architecture</h3>
-        <p>Scalable system design, modular architecture, performance optimization.</p>
-      </div>
-      <div class="bento-card wide">
-        <span class="bento-icon">👨‍💼</span>
-        <h3>Leadership</h3>
-        <p>Team mentoring, code reviews, sprint planning, and direct client communication — bridging engineering and business goals.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- TECH STACK MARQUEE -->
-  <div class="marquee-section">
-    <div class="marquee-label">Tech Stack</div>
-    <div class="marquee-wrapper">
-      <div class="marquee-track">
-        <span class="tech-badge">PHP</span>
-        <span class="tech-badge">Laravel</span>
-        <span class="tech-badge">Lumen</span>
-        <span class="tech-badge">MySQL</span>
-        <span class="tech-badge">Redis</span>
-        <span class="tech-badge">REST API</span>
-        <span class="tech-badge">Microservices</span>
-        <span class="tech-badge">Firebase</span>
-        <span class="tech-badge">Stripe</span>
-        <span class="tech-badge">PayPal</span>
-        <span class="tech-badge">Pusher</span>
-        <span class="tech-badge">Agora</span>
-        <span class="tech-badge">Docker</span>
-        <span class="tech-badge">Git</span>
-        <span class="tech-badge">CodeIgniter</span>
-        <span class="tech-badge">JWT</span>
-        <span class="tech-badge">OAuth 2.0</span>
-        <span class="tech-badge">WebSockets</span>
-        <!-- duplicate for seamless loop -->
-        <span class="tech-badge">PHP</span>
-        <span class="tech-badge">Laravel</span>
-        <span class="tech-badge">Lumen</span>
-        <span class="tech-badge">MySQL</span>
-        <span class="tech-badge">Redis</span>
-        <span class="tech-badge">REST API</span>
-        <span class="tech-badge">Microservices</span>
-        <span class="tech-badge">Firebase</span>
-        <span class="tech-badge">Stripe</span>
-        <span class="tech-badge">PayPal</span>
-        <span class="tech-badge">Pusher</span>
-        <span class="tech-badge">Agora</span>
-        <span class="tech-badge">Docker</span>
-        <span class="tech-badge">Git</span>
-        <span class="tech-badge">CodeIgniter</span>
-        <span class="tech-badge">JWT</span>
-        <span class="tech-badge">OAuth 2.0</span>
-        <span class="tech-badge">WebSockets</span>
+  <span class="c-kw">public function</span> <span class="c-fn">build</span><span class="c-dim">():</span> <span class="c-cl">System</span>
+  <span class="c-dim">{</span>
+    <span class="c-kw">return</span> <span class="c-dim">$this-></span><span class="c-fn">architect</span><span class="c-dim">()</span>
+      <span class="c-dim">-></span><span class="c-fn">optimize</span><span class="c-dim">()</span>
+      <span class="c-dim">-></span><span class="c-fn">deploy</span><span class="c-dim">();</span>
+  <span class="c-dim">}</span>
+<span class="c-dim">}</span></pre>
       </div>
     </div>
   </div>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="fade">
-    <div class="section-label">Case Studies</div>
-    <h2>Projects I've built.</h2>
-    <p class="section-desc">Production-grade systems across multiple domains and industries.</p>
-
-    <div class="grid">
-
-      <div class="card">
-        <h3>Beauty Marketplace Platform</h3>
-        <p><b>Problem:</b> Service providers lacked a unified platform for bookings, promotions, and customer management.</p>
-        <p><b>Solution:</b> Built a Laravel-based marketplace with real-time booking, admin dashboard, and secure payment integration.</p>
-        <p><b>Impact:</b> Streamlined appointment handling and improved UX for vendors and customers.</p>
-        <div class="card-tags">
-          <span class="tag">Laravel</span>
-          <span class="tag">MySQL</span>
-          <span class="tag">Mobile Apps</span>
-        </div>
+  <!-- Bento Grid -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="col-span-2 bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 cursor-default group">
+      <div class="w-10 h-10 rounded-xl bg-sky-400/10 border border-sky-400/15 text-sky-400 flex items-center justify-center mb-4">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       </div>
-
-      <div class="card">
-        <h3>Global Payment Transfer App</h3>
-        <p><b>Problem:</b> Complex and insecure international money transfers.</p>
-        <p><b>Solution:</b> Developed a wallet-based system with secure transactions and multi-payment integrations.</p>
-        <p><b>Impact:</b> Enabled seamless domestic & international transfers with improved reliability.</p>
-        <div class="card-tags">
-          <span class="tag">Core PHP</span>
-          <span class="tag">Authorize.Net</span>
-          <span class="tag">Firebase</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Smart Ring Health Platform</h3>
-        <p><b>Problem:</b> Real-time health data tracking and synchronization challenges.</p>
-        <p><b>Solution:</b> Designed APIs for wearable integration handling heart rate, sleep & activity tracking.</p>
-        <p><b>Impact:</b> Delivered accurate real-time insights improving user health monitoring.</p>
-        <div class="card-tags">
-          <span class="tag">Laravel</span>
-          <span class="tag">IoT</span>
-          <span class="tag">REST API</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>OTT Streaming Platform</h3>
-        <p><b>Problem:</b> High concurrency streaming with live events and global users.</p>
-        <p><b>Solution:</b> Built scalable backend with live streaming, chat, and subscription payments.</p>
-        <p><b>Impact:</b> Delivered smooth streaming experience with global accessibility.</p>
-        <div class="card-tags">
-          <span class="tag">Laravel</span>
-          <span class="tag">Stripe</span>
-          <span class="tag">Pusher</span>
-          <span class="tag">PayPal</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>On-Demand Service Platform</h3>
-        <p><b>Problem:</b> Difficulty finding trusted local service providers.</p>
-        <p><b>Solution:</b> Created a platform connecting users with verified professionals and real-time chat.</p>
-        <p><b>Impact:</b> Faster service discovery and improved service efficiency.</p>
-        <div class="card-tags">
-          <span class="tag">CodeIgniter</span>
-          <span class="tag">Firebase</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Global Dating Platform</h3>
-        <p><b>Problem:</b> Limited global connectivity for users seeking relationships.</p>
-        <p><b>Solution:</b> Developed scalable platform enabling global user connections.</p>
-        <p><b>Impact:</b> Increased user engagement and cross-region interaction.</p>
-        <div class="card-tags">
-          <span class="tag">Laravel</span>
-          <span class="tag">WebSockets</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Multivendor E-commerce</h3>
-        <p><b>Problem:</b> Managing multiple vendors and product lifecycle.</p>
-        <p><b>Solution:</b> Designed vendor-based architecture with order lifecycle and payment integration.</p>
-        <p><b>Impact:</b> Scalable marketplace supporting multiple vendors and transactions.</p>
-        <div class="card-tags">
-          <span class="tag">Laravel</span>
-          <span class="tag">Stripe</span>
-          <span class="tag">PayPal</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Car Wash Management System</h3>
-        <p><b>Problem:</b> Inefficient booking and service coordination.</p>
-        <p><b>Solution:</b> Built slot-based booking and service tracking system.</p>
-        <p><b>Impact:</b> Improved scheduling and service delivery efficiency.</p>
-        <div class="card-tags">
-          <span class="tag">Laravel</span>
-          <span class="tag">MySQL</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Healthcare Consultation Platform</h3>
-        <p><b>Problem:</b> Limited access to professional counselors remotely.</p>
-        <p><b>Solution:</b> Developed video consultation and booking system.</p>
-        <p><b>Impact:</b> Enabled remote healthcare accessibility.</p>
-        <div class="card-tags">
-          <span class="tag">Laravel</span>
-          <span class="tag">Agora</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Business Networking Platform</h3>
-        <p><b>Problem:</b> Lack of platform for startups to connect with investors.</p>
-        <p><b>Solution:</b> Built networking platform for entrepreneurs and investors.</p>
-        <p><b>Impact:</b> Helped businesses build partnerships and grow.</p>
-        <div class="card-tags">
-          <span class="tag">Laravel</span>
-          <span class="tag">Firebase</span>
-        </div>
-      </div>
-
+      <h3 class="font-head font-semibold text-[15px] mb-2">Backend Expertise</h3>
+      <p class="text-slate-400 text-[13px] leading-[1.7]">Laravel, PHP, Lumen, REST APIs, Microservices — building high-performance production-grade systems from the ground up with clean architecture.</p>
     </div>
-  </section>
-
-  <!-- EXPERIENCE / TIMELINE -->
-  <section id="experience" class="fade">
-    <div class="section-label">Experience</div>
-    <h2>Career Journey</h2>
-    <p class="section-desc">9+ years of building and leading backend engineering teams.</p>
-
-    <div class="timeline">
-
-      <div class="timeline-item">
-        <div class="timeline-dot active"></div>
-        <div class="timeline-card">
-          <div class="timeline-header">
-            <span class="timeline-role">Technical Lead</span>
-            <span class="timeline-period">2022 – Present</span>
-          </div>
-          <div class="timeline-company">Software Company · Full-time</div>
-          <ul>
-            <li>Leading a team of 9 developers across multiple concurrent projects</li>
-            <li>Architecting microservices-based backend systems for fintech and OTT platforms</li>
-            <li>Conducting code reviews, sprint planning, and client communication</li>
-            <li>Defining engineering standards, Git strategies, and deployment pipelines</li>
-          </ul>
-        </div>
+    <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 cursor-default">
+      <div class="w-10 h-10 rounded-xl bg-sky-400/10 border border-sky-400/15 text-sky-400 flex items-center justify-center mb-4">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-header">
-            <span class="timeline-role">Senior Backend Developer</span>
-            <span class="timeline-period">2019 – 2022</span>
-          </div>
-          <div class="timeline-company">Software Company · Full-time</div>
-          <ul>
-            <li>Built and optimized REST APIs for high-traffic IoT and marketplace platforms</li>
-            <li>Integrated third-party payment gateways: Stripe, PayPal, Authorize.Net</li>
-            <li>Improved API response times and reduced database query latency</li>
-            <li>Mentored junior developers and introduced modular architecture patterns</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-header">
-            <span class="timeline-role">Backend Developer</span>
-            <span class="timeline-period">2016 – 2019</span>
-          </div>
-          <div class="timeline-company">Software Company · Full-time</div>
-          <ul>
-            <li>Developed full-stack web applications using PHP, Laravel, and CodeIgniter</li>
-            <li>Built real-time features using Firebase and Pusher WebSockets</li>
-            <li>Delivered e-commerce, service-booking, and social networking platforms</li>
-          </ul>
-        </div>
-      </div>
-
+      <h3 class="font-head font-semibold text-[15px] mb-2">Integrations</h3>
+      <p class="text-slate-400 text-[13px] leading-[1.7]">Stripe, PayPal, Firebase, Agora, Pusher, Authorize.Net and more.</p>
     </div>
-  </section>
+    <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 cursor-default">
+      <div class="w-10 h-10 rounded-xl bg-sky-400/10 border border-sky-400/15 text-sky-400 flex items-center justify-center mb-4">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <h3 class="font-head font-semibold text-[15px] mb-2">Architecture</h3>
+      <p class="text-slate-400 text-[13px] leading-[1.7]">Scalable system design, modular architecture, performance optimization.</p>
+    </div>
+    <div class="col-span-2 bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 cursor-default">
+      <div class="w-10 h-10 rounded-xl bg-sky-400/10 border border-sky-400/15 text-sky-400 flex items-center justify-center mb-4">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3 class="font-head font-semibold text-[15px] mb-2">Leadership</h3>
+      <p class="text-slate-400 text-[13px] leading-[1.7]">Team mentoring, code reviews, sprint planning, and direct client communication — bridging engineering excellence with business goals across 9+ engineers.</p>
+    </div>
+  </div>
+</section>
 
-  <!-- IMPACT -->
-  <section id="impact" class="fade">
-    <div class="section-label">Leadership & Impact</div>
-    <h2>How I drive results.</h2>
+<!-- TECH MARQUEE -->
+<div class="overflow-hidden border-t border-b border-white/[.05] bg-white/[.015] py-8" aria-label="Technology stack">
+  <p class="text-center font-mono text-[10px] uppercase tracking-[2.5px] text-slate-500 mb-5">Tech Stack</p>
+  <div class="marquee-wrap overflow-hidden">
+    <div class="marquee-track flex gap-2.5 w-max">
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">PHP</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Laravel</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Lumen</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">MySQL</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Redis</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">REST API</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Microservices</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Firebase</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Stripe</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">PayPal</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Pusher</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Agora</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Docker</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">Git</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">CodeIgniter</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">JWT</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">OAuth 2.0</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap hover:border-sky-400/40 hover:text-sky-400 transition-all duration-200 cursor-default">WebSockets</span>
+      <!-- duplicate -->
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">PHP</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Laravel</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Lumen</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">MySQL</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Redis</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">REST API</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Microservices</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Firebase</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Stripe</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">PayPal</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Pusher</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Agora</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Docker</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">Git</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">CodeIgniter</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">JWT</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">OAuth 2.0</span>
+      <span class="font-mono text-xs font-medium px-4 py-2 bg-white/[.03] border border-white/[.07] rounded-lg text-slate-400 whitespace-nowrap">WebSockets</span>
+    </div>
+  </div>
+</div>
 
-    <div class="grid">
+<div class="aurora aurora-alt"></div>
 
-      <div class="impact-card">
-        <h3>👨‍💻 Team Leadership</h3>
-        <p>Led and mentored a team of 9 developers across multiple projects.</p>
-        <ul>
-          <li>Conducted code reviews and ensured best practices</li>
-          <li>Improved team productivity and delivery timelines</li>
-          <li>Guided junior developers into mid-level engineers</li>
+<!-- PROJECTS -->
+<section id="projects" class="fade max-w-[1120px] mx-auto px-6 py-24">
+  <p class="font-mono text-[11px] font-semibold tracking-[2.5px] uppercase text-sky-400 mb-3">Case Studies</p>
+  <h2 class="font-head font-bold tracking-tight leading-[1.1] mb-3" style="font-size:clamp(28px,4.5vw,44px)">Projects I've built.</h2>
+  <p class="text-slate-400 text-[15px] max-w-[520px] mb-12 leading-[1.75]">Production-grade systems across multiple domains and industries.</p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[18px]">
+
+    <div class="card bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/30 relative overflow-hidden cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-400" tabindex="0">
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-sky-400 to-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      <p class="font-mono text-[10px] font-semibold uppercase tracking-[1.5px] text-indigo-400 mb-2.5">Marketplace</p>
+      <h3 class="font-head font-semibold text-[15px] mb-3">Beauty Marketplace Platform</h3>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Problem:</span> Service providers lacked a unified platform for bookings, promotions, and customer management.</p>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Solution:</span> Built a Laravel-based marketplace with real-time booking and secure payment integration.</p>
+      <p class="text-slate-400 text-[13px] leading-[1.65]"><span class="text-slate-200 font-semibold">Impact:</span> Streamlined appointment handling and improved UX for vendors and customers.</p>
+      <div class="flex flex-wrap gap-1.5 mt-4 pt-3.5 border-t border-white/[.05]">
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Laravel</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">MySQL</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Mobile Apps</span>
+      </div>
+    </div>
+
+    <div class="card bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/30 relative overflow-hidden cursor-pointer" tabindex="0">
+      <p class="font-mono text-[10px] font-semibold uppercase tracking-[1.5px] text-indigo-400 mb-2.5">Fintech</p>
+      <h3 class="font-head font-semibold text-[15px] mb-3">Global Payment Transfer App</h3>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Problem:</span> Complex and insecure international money transfers.</p>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Solution:</span> Developed a wallet-based system with secure transactions and multi-payment integrations.</p>
+      <p class="text-slate-400 text-[13px] leading-[1.65]"><span class="text-slate-200 font-semibold">Impact:</span> Enabled seamless domestic &amp; international transfers with improved reliability.</p>
+      <div class="flex flex-wrap gap-1.5 mt-4 pt-3.5 border-t border-white/[.05]">
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Core PHP</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Authorize.Net</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Firebase</span>
+      </div>
+    </div>
+
+    <div class="card bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/30 relative overflow-hidden cursor-pointer" tabindex="0">
+      <p class="font-mono text-[10px] font-semibold uppercase tracking-[1.5px] text-indigo-400 mb-2.5">IoT</p>
+      <h3 class="font-head font-semibold text-[15px] mb-3">Smart Ring Health Platform</h3>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Problem:</span> Real-time health data tracking and synchronization challenges.</p>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Solution:</span> Designed APIs for wearable integration handling heart rate, sleep &amp; activity tracking.</p>
+      <p class="text-slate-400 text-[13px] leading-[1.65]"><span class="text-slate-200 font-semibold">Impact:</span> Delivered accurate real-time insights improving user health monitoring.</p>
+      <div class="flex flex-wrap gap-1.5 mt-4 pt-3.5 border-t border-white/[.05]">
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Laravel</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">IoT</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">REST API</span>
+      </div>
+    </div>
+
+    <div class="card bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/30 relative overflow-hidden cursor-pointer" tabindex="0">
+      <p class="font-mono text-[10px] font-semibold uppercase tracking-[1.5px] text-indigo-400 mb-2.5">OTT</p>
+      <h3 class="font-head font-semibold text-[15px] mb-3">OTT Streaming Platform</h3>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Problem:</span> High concurrency streaming with live events and global users.</p>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Solution:</span> Built scalable backend with live streaming, chat, and subscription payments.</p>
+      <p class="text-slate-400 text-[13px] leading-[1.65]"><span class="text-slate-200 font-semibold">Impact:</span> Delivered smooth streaming experience with global accessibility.</p>
+      <div class="flex flex-wrap gap-1.5 mt-4 pt-3.5 border-t border-white/[.05]">
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Laravel</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Stripe</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Pusher</span>
+      </div>
+    </div>
+
+    <div class="card bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/30 relative overflow-hidden cursor-pointer" tabindex="0">
+      <p class="font-mono text-[10px] font-semibold uppercase tracking-[1.5px] text-indigo-400 mb-2.5">Service</p>
+      <h3 class="font-head font-semibold text-[15px] mb-3">On-Demand Service Platform</h3>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Problem:</span> Difficulty finding trusted local service providers.</p>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Solution:</span> Created a platform connecting users with verified professionals and real-time chat.</p>
+      <p class="text-slate-400 text-[13px] leading-[1.65]"><span class="text-slate-200 font-semibold">Impact:</span> Faster service discovery and improved efficiency.</p>
+      <div class="flex flex-wrap gap-1.5 mt-4 pt-3.5 border-t border-white/[.05]">
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">CodeIgniter</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Firebase</span>
+      </div>
+    </div>
+
+    <div class="card bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/30 relative overflow-hidden cursor-pointer" tabindex="0">
+      <p class="font-mono text-[10px] font-semibold uppercase tracking-[1.5px] text-indigo-400 mb-2.5">Healthcare</p>
+      <h3 class="font-head font-semibold text-[15px] mb-3">Healthcare Consultation Platform</h3>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Problem:</span> Limited access to professional counselors remotely.</p>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Solution:</span> Developed video consultation and booking system.</p>
+      <p class="text-slate-400 text-[13px] leading-[1.65]"><span class="text-slate-200 font-semibold">Impact:</span> Enabled remote healthcare accessibility.</p>
+      <div class="flex flex-wrap gap-1.5 mt-4 pt-3.5 border-t border-white/[.05]">
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Laravel</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Agora</span>
+      </div>
+    </div>
+
+    <div class="card bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/30 relative overflow-hidden cursor-pointer" tabindex="0">
+      <p class="font-mono text-[10px] font-semibold uppercase tracking-[1.5px] text-indigo-400 mb-2.5">E-Commerce</p>
+      <h3 class="font-head font-semibold text-[15px] mb-3">Multivendor E-commerce</h3>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Problem:</span> Managing multiple vendors and product lifecycle.</p>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Solution:</span> Designed vendor-based architecture with order lifecycle and payment integration.</p>
+      <p class="text-slate-400 text-[13px] leading-[1.65]"><span class="text-slate-200 font-semibold">Impact:</span> Scalable marketplace supporting multiple vendors.</p>
+      <div class="flex flex-wrap gap-1.5 mt-4 pt-3.5 border-t border-white/[.05]">
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Laravel</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Stripe</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">PayPal</span>
+      </div>
+    </div>
+
+    <div class="card bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/30 relative overflow-hidden cursor-pointer" tabindex="0">
+      <p class="font-mono text-[10px] font-semibold uppercase tracking-[1.5px] text-indigo-400 mb-2.5">Social</p>
+      <h3 class="font-head font-semibold text-[15px] mb-3">Global Dating Platform</h3>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Problem:</span> Limited global connectivity for users seeking relationships.</p>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Solution:</span> Developed scalable platform enabling global user connections.</p>
+      <p class="text-slate-400 text-[13px] leading-[1.65]"><span class="text-slate-200 font-semibold">Impact:</span> Increased user engagement and cross-region interaction.</p>
+      <div class="flex flex-wrap gap-1.5 mt-4 pt-3.5 border-t border-white/[.05]">
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Laravel</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">WebSockets</span>
+      </div>
+    </div>
+
+    <div class="card bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/30 relative overflow-hidden cursor-pointer" tabindex="0">
+      <p class="font-mono text-[10px] font-semibold uppercase tracking-[1.5px] text-indigo-400 mb-2.5">B2B</p>
+      <h3 class="font-head font-semibold text-[15px] mb-3">Business Networking Platform</h3>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Problem:</span> Lack of platform for startups to connect with investors.</p>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Solution:</span> Built networking platform for entrepreneurs and investors.</p>
+      <p class="text-slate-400 text-[13px] leading-[1.65]"><span class="text-slate-200 font-semibold">Impact:</span> Helped businesses build partnerships and grow.</p>
+      <div class="flex flex-wrap gap-1.5 mt-4 pt-3.5 border-t border-white/[.05]">
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Laravel</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Firebase</span>
+      </div>
+    </div>
+
+    <div class="card bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/30 relative overflow-hidden cursor-pointer" tabindex="0">
+      <p class="font-mono text-[10px] font-semibold uppercase tracking-[1.5px] text-indigo-400 mb-2.5">Service</p>
+      <h3 class="font-head font-semibold text-[15px] mb-3">Car Wash Management System</h3>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Problem:</span> Inefficient booking and service coordination.</p>
+      <p class="text-slate-400 text-[13px] mb-1.5 leading-[1.65]"><span class="text-slate-200 font-semibold">Solution:</span> Built slot-based booking and service tracking system.</p>
+      <p class="text-slate-400 text-[13px] leading-[1.65]"><span class="text-slate-200 font-semibold">Impact:</span> Improved scheduling and service delivery efficiency.</p>
+      <div class="flex flex-wrap gap-1.5 mt-4 pt-3.5 border-t border-white/[.05]">
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">Laravel</span>
+        <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-400/[.08] border border-indigo-400/[.18] text-indigo-400 font-medium">MySQL</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="aurora"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="fade max-w-[1120px] mx-auto px-6 py-24">
+  <p class="font-mono text-[11px] font-semibold tracking-[2.5px] uppercase text-sky-400 mb-3">Experience</p>
+  <h2 class="font-head font-bold tracking-tight leading-[1.1] mb-3" style="font-size:clamp(28px,4.5vw,44px)">Career Journey</h2>
+  <p class="text-slate-400 text-[15px] max-w-[520px] mb-0 leading-[1.75]">9+ years of building and leading backend engineering teams.</p>
+
+  <div class="tl-line relative pl-10 mt-14">
+
+    <div class="tl-item relative mb-8">
+      <span class="absolute -left-[36px] top-[10px] w-[13px] h-[13px] rounded-full bg-sky-400 border-2 border-sky-400 shadow-[0_0_14px_rgba(56,189,248,.5)]" aria-hidden="true"></span>
+      <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:shadow-xl hover:shadow-black/25 transition-all duration-300">
+        <div class="flex justify-between items-start flex-wrap gap-3 mb-1">
+          <span class="font-head font-semibold text-[15px]">Technical Lead</span>
+          <span class="font-mono text-[11px] text-sky-400 bg-sky-400/[.08] border border-sky-400/20 px-3 py-[3px] rounded-full font-medium">2022 – Present</span>
+        </div>
+        <p class="font-mono text-xs text-slate-500 mb-3">Software Company · Full-time</p>
+        <ul class="space-y-1.5">
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Leading a team of 9 developers across multiple concurrent projects</li>
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Architecting microservices-based backend systems for fintech and OTT platforms</li>
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Conducting code reviews, sprint planning, and client communication</li>
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Defining engineering standards, Git strategies, and deployment pipelines</li>
         </ul>
       </div>
-
-      <div class="impact-card">
-        <h3>⚡ Scalability & Performance</h3>
-        <p>Enhanced backend systems to handle high traffic and real-time data.</p>
-        <ul>
-          <li>Optimized APIs and database queries</li>
-          <li>Reduced latency and improved response times</li>
-          <li>Designed scalable architecture for growth</li>
-        </ul>
-      </div>
-
-      <div class="impact-card">
-        <h3>🏗️ Architecture & Standards</h3>
-        <p>Established strong engineering practices across projects.</p>
-        <ul>
-          <li>Defined coding standards and Git strategies</li>
-          <li>Implemented modular & microservices architecture</li>
-          <li>Ensured maintainability and clean code structure</li>
-        </ul>
-      </div>
-
-      <div class="impact-card">
-        <h3>🤝 Client & Product Ownership</h3>
-        <p>Worked directly with clients to deliver business-focused solutions.</p>
-        <ul>
-          <li>Gathered and refined requirements</li>
-          <li>Translated business needs into technical solutions</li>
-          <li>Ensured on-time project delivery</li>
-        </ul>
-      </div>
-
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-label">Get In Touch</div>
-    <h2>Let's work together.</h2>
-
-    <div class="contact-grid">
-
-      <div class="contact-info">
-        <h3>Open to opportunities</h3>
-        <p>Whether it's a project, collaboration, or just a conversation about backend systems — my inbox is always open.</p>
-
-        <div class="contact-links">
-          <a href="mailto:jadejaaniruddhsinh5456@gmail.com" class="contact-link">
-            <div class="contact-link-icon">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <rect x="2" y="4" width="20" height="16" rx="2"/>
-                <path d="m2 7 10 7 10-7"/>
-              </svg>
-            </div>
-            jadejaaniruddhsinh5456@gmail.com
-          </a>
-          <a href="tel:+919033915456" class="contact-link">
-            <div class="contact-link-icon">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </div>
-            +91 90339 15456
-          </a>
-          <a href="https://in.linkedin.com/in/aniruddhsinh-jadeja-804116154" target="_blank" class="contact-link">
-            <div class="contact-link-icon">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
-                <circle cx="4" cy="4" r="2"/>
-              </svg>
-            </div>
-            AniruddhSinh Jadeja on LinkedIn
-          </a>
+    <div class="tl-item relative mb-8">
+      <span class="absolute -left-[36px] top-[10px] w-[13px] h-[13px] rounded-full bg-[#070c18] border-2 border-sky-400/40" aria-hidden="true"></span>
+      <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:shadow-xl hover:shadow-black/25 transition-all duration-300">
+        <div class="flex justify-between items-start flex-wrap gap-3 mb-1">
+          <span class="font-head font-semibold text-[15px]">Senior Backend Developer</span>
+          <span class="font-mono text-[11px] text-sky-400 bg-sky-400/[.08] border border-sky-400/20 px-3 py-[3px] rounded-full font-medium">2019 – 2022</span>
         </div>
+        <p class="font-mono text-xs text-slate-500 mb-3">Software Company · Full-time</p>
+        <ul class="space-y-1.5">
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Built and optimized REST APIs for high-traffic IoT and marketplace platforms</li>
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Integrated third-party payment gateways: Stripe, PayPal, Authorize.Net</li>
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Improved API response times and reduced database query latency</li>
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Mentored junior developers and introduced modular architecture patterns</li>
+        </ul>
       </div>
-
-      <div class="form-card">
-        <form id="contact-form" onsubmit="sendEmail(event)">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fname">Name</label>
-              <input type="text" id="fname" name="name" placeholder="Your name" required>
-            </div>
-            <div class="form-group">
-              <label for="femail">Email</label>
-              <input type="email" id="femail" name="email" placeholder="your@email.com" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="fsubject">Subject</label>
-            <input type="text" id="fsubject" name="subject" placeholder="Project / Collaboration / Other">
-          </div>
-          <div class="form-group">
-            <label for="fmessage">Message</label>
-            <textarea id="fmessage" name="message" placeholder="Tell me about your project..." required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">Send Message</button>
-        </form>
-      </div>
-
     </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <span class="footer-copy">© 2026 AniruddhSinh Jadeja. All rights reserved.</span>
-      <div class="footer-socials">
-        <a href="mailto:jadejaaniruddhsinh5456@gmail.com" class="social-btn" title="Email">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="m2 7 10 7 10-7"/>
-          </svg>
+    <div class="tl-item relative">
+      <span class="absolute -left-[36px] top-[10px] w-[13px] h-[13px] rounded-full bg-[#070c18] border-2 border-sky-400/40" aria-hidden="true"></span>
+      <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-sky-400/25 hover:shadow-xl hover:shadow-black/25 transition-all duration-300">
+        <div class="flex justify-between items-start flex-wrap gap-3 mb-1">
+          <span class="font-head font-semibold text-[15px]">Backend Developer</span>
+          <span class="font-mono text-[11px] text-sky-400 bg-sky-400/[.08] border border-sky-400/20 px-3 py-[3px] rounded-full font-medium">2016 – 2019</span>
+        </div>
+        <p class="font-mono text-xs text-slate-500 mb-3">Software Company · Full-time</p>
+        <ul class="space-y-1.5">
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Developed web applications using PHP, Laravel, and CodeIgniter</li>
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Built real-time features using Firebase and Pusher WebSockets</li>
+          <li class="text-slate-400 text-[13px] pl-5 relative leading-[1.65] before:content-['→'] before:absolute before:left-0 before:text-sky-400 before:font-mono before:text-[11px] before:top-[3px]">Delivered e-commerce, service-booking, and social networking platforms</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact" class="fade max-w-[1120px] mx-auto px-6 py-24">
+  <p class="font-mono text-[11px] font-semibold tracking-[2.5px] uppercase text-sky-400 mb-3">Leadership &amp; Impact</p>
+  <h2 class="font-head font-bold tracking-tight leading-[1.1] mb-12" style="font-size:clamp(28px,4.5vw,44px)">How I drive results.</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+    <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-purple-400/35 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/25 transition-all duration-300 cursor-default">
+      <div class="w-10 h-10 rounded-xl bg-purple-400/[.09] border border-purple-400/15 text-purple-400 flex items-center justify-center mb-4">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3 class="font-head font-semibold text-[15px] mb-2.5">Team Leadership</h3>
+      <p class="text-slate-400 text-[13px] mb-3.5 leading-[1.6]">Led and mentored a team of 9 developers across multiple projects.</p>
+      <ul class="space-y-2.5">
+        <li class="text-slate-400 text-[13px] pb-2.5 border-b border-white/[.04] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Conducted code reviews and ensured best practices</li>
+        <li class="text-slate-400 text-[13px] pb-2.5 border-b border-white/[.04] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Improved team productivity and delivery timelines</li>
+        <li class="text-slate-400 text-[13px] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Guided junior developers into mid-level engineers</li>
+      </ul>
+    </div>
+
+    <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-purple-400/35 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/25 transition-all duration-300 cursor-default">
+      <div class="w-10 h-10 rounded-xl bg-purple-400/[.09] border border-purple-400/15 text-purple-400 flex items-center justify-center mb-4">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <h3 class="font-head font-semibold text-[15px] mb-2.5">Scalability &amp; Performance</h3>
+      <p class="text-slate-400 text-[13px] mb-3.5 leading-[1.6]">Enhanced backend systems to handle high traffic and real-time data.</p>
+      <ul class="space-y-2.5">
+        <li class="text-slate-400 text-[13px] pb-2.5 border-b border-white/[.04] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Optimized APIs and database queries</li>
+        <li class="text-slate-400 text-[13px] pb-2.5 border-b border-white/[.04] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Reduced latency and improved response times</li>
+        <li class="text-slate-400 text-[13px] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Designed scalable architecture for growth</li>
+      </ul>
+    </div>
+
+    <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-purple-400/35 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/25 transition-all duration-300 cursor-default">
+      <div class="w-10 h-10 rounded-xl bg-purple-400/[.09] border border-purple-400/15 text-purple-400 flex items-center justify-center mb-4">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <h3 class="font-head font-semibold text-[15px] mb-2.5">Architecture &amp; Standards</h3>
+      <p class="text-slate-400 text-[13px] mb-3.5 leading-[1.6]">Established strong engineering practices across projects.</p>
+      <ul class="space-y-2.5">
+        <li class="text-slate-400 text-[13px] pb-2.5 border-b border-white/[.04] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Defined coding standards and Git strategies</li>
+        <li class="text-slate-400 text-[13px] pb-2.5 border-b border-white/[.04] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Implemented modular &amp; microservices architecture</li>
+        <li class="text-slate-400 text-[13px] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Ensured maintainability and clean code structure</li>
+      </ul>
+    </div>
+
+    <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-6 hover:border-purple-400/35 hover:-translate-y-[5px] hover:shadow-2xl hover:shadow-black/25 transition-all duration-300 cursor-default">
+      <div class="w-10 h-10 rounded-xl bg-purple-400/[.09] border border-purple-400/15 text-purple-400 flex items-center justify-center mb-4">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <h3 class="font-head font-semibold text-[15px] mb-2.5">Client &amp; Product Ownership</h3>
+      <p class="text-slate-400 text-[13px] mb-3.5 leading-[1.6]">Worked directly with clients to deliver business-focused solutions.</p>
+      <ul class="space-y-2.5">
+        <li class="text-slate-400 text-[13px] pb-2.5 border-b border-white/[.04] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Gathered and refined requirements</li>
+        <li class="text-slate-400 text-[13px] pb-2.5 border-b border-white/[.04] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Translated business needs into technical solutions</li>
+        <li class="text-slate-400 text-[13px] flex items-start gap-2"><span class="text-emerald-400 font-mono text-xs mt-[2px] shrink-0">✓</span>Ensured on-time project delivery</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="aurora"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="max-w-[1120px] mx-auto px-6 py-24">
+  <p class="font-mono text-[11px] font-semibold tracking-[2.5px] uppercase text-sky-400 mb-3">Get In Touch</p>
+  <h2 class="font-head font-bold tracking-tight leading-[1.1] mb-0" style="font-size:clamp(28px,4.5vw,44px)">Let's work together.</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-12 mt-12 items-start">
+
+    <div>
+      <h3 class="font-head font-semibold text-xl mb-2.5">Open to opportunities</h3>
+      <p class="text-slate-400 text-sm leading-[1.75] mb-7">Whether it's a project, collaboration, or a conversation about backend systems — my inbox is always open.</p>
+      <div class="flex flex-col gap-2.5">
+        <a href="mailto:jadejaaniruddhsinh5456@gmail.com" class="flex items-center gap-3 text-slate-400 text-[13px] px-4 py-3 rounded-xl border border-white/[.07] bg-white/[.03] hover:border-sky-400/35 hover:text-slate-100 hover:translate-x-1 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-400">
+          <span class="w-[34px] h-[34px] rounded-lg bg-sky-400/[.08] border border-sky-400/14 text-sky-400 flex items-center justify-center shrink-0">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          </span>
+          jadejaaniruddhsinh5456@gmail.com
         </a>
-        <a href="https://in.linkedin.com/in/aniruddhsinh-jadeja-804116154" target="_blank" class="social-btn" title="LinkedIn">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
-            <circle cx="4" cy="4" r="2"/>
-          </svg>
+        <a href="tel:+919033915456" class="flex items-center gap-3 text-slate-400 text-[13px] px-4 py-3 rounded-xl border border-white/[.07] bg-white/[.03] hover:border-sky-400/35 hover:text-slate-100 hover:translate-x-1 transition-all duration-300 cursor-pointer">
+          <span class="w-[34px] h-[34px] rounded-lg bg-sky-400/[.08] border border-sky-400/14 text-sky-400 flex items-center justify-center shrink-0">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          +91 90339 15456
         </a>
-        <a href="https://github.com/AniruddhSinh-Jadeja" target="_blank" class="social-btn" title="GitHub">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-          </svg>
+        <a href="https://in.linkedin.com/in/aniruddhsinh-jadeja-804116154" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-slate-400 text-[13px] px-4 py-3 rounded-xl border border-white/[.07] bg-white/[.03] hover:border-sky-400/35 hover:text-slate-100 hover:translate-x-1 transition-all duration-300 cursor-pointer">
+          <span class="w-[34px] h-[34px] rounded-lg bg-sky-400/[.08] border border-sky-400/14 text-sky-400 flex items-center justify-center shrink-0">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </span>
+          LinkedIn — AniruddhSinh Jadeja
         </a>
       </div>
     </div>
-  </footer>
 
-  <script src="script.js"></script>
+    <div class="bg-white/[.03] border border-white/[.07] rounded-2xl p-7">
+      <form id="contact-form" onsubmit="sendEmail(event)" novalidate>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-3.5">
+          <div>
+            <label for="fname" class="block font-mono text-[11px] font-semibold text-slate-500 uppercase tracking-[.8px] mb-1.5">Name</label>
+            <input type="text" id="fname" name="name" placeholder="Your name" required autocomplete="name"
+              class="w-full bg-[#070c18]/60 border border-white/[.07] rounded-xl px-4 py-2.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-sky-400 focus:shadow-[0_0_0_3px_rgba(56,189,248,.08)] transition-all duration-300 font-body">
+          </div>
+          <div>
+            <label for="femail" class="block font-mono text-[11px] font-semibold text-slate-500 uppercase tracking-[.8px] mb-1.5">Email</label>
+            <input type="email" id="femail" name="email" placeholder="your@email.com" required autocomplete="email"
+              class="w-full bg-[#070c18]/60 border border-white/[.07] rounded-xl px-4 py-2.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-sky-400 focus:shadow-[0_0_0_3px_rgba(56,189,248,.08)] transition-all duration-300 font-body">
+          </div>
+        </div>
+        <div class="mb-3.5">
+          <label for="fsubject" class="block font-mono text-[11px] font-semibold text-slate-500 uppercase tracking-[.8px] mb-1.5">Subject</label>
+          <input type="text" id="fsubject" name="subject" placeholder="Project / Collaboration / Other"
+            class="w-full bg-[#070c18]/60 border border-white/[.07] rounded-xl px-4 py-2.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-sky-400 focus:shadow-[0_0_0_3px_rgba(56,189,248,.08)] transition-all duration-300 font-body">
+        </div>
+        <div class="mb-4">
+          <label for="fmessage" class="block font-mono text-[11px] font-semibold text-slate-500 uppercase tracking-[.8px] mb-1.5">Message</label>
+          <textarea id="fmessage" name="message" placeholder="Tell me about your project..." required rows="5"
+            class="w-full bg-[#070c18]/60 border border-white/[.07] rounded-xl px-4 py-2.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-sky-400 focus:shadow-[0_0_0_3px_rgba(56,189,248,.08)] transition-all duration-300 font-body resize-y"></textarea>
+        </div>
+        <button type="submit" class="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-sky-400 to-indigo-400 text-white text-sm font-semibold rounded-xl hover:-translate-y-[2px] hover:shadow-[0_8px_28px_rgba(56,189,248,.35)] active:translate-y-0 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-400 focus-visible:outline-offset-2 font-body">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Message
+        </button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/[.06] py-8 px-6">
+  <div class="max-w-[1120px] mx-auto flex justify-between items-center flex-wrap gap-4">
+    <span class="font-mono text-xs text-slate-500">© 2026 AniruddhSinh Jadeja. Crafted with precision.</span>
+    <div class="flex gap-2">
+      <a href="mailto:jadejaaniruddhsinh5456@gmail.com" aria-label="Send email" class="w-9 h-9 flex items-center justify-center rounded-xl border border-white/[.07] bg-white/[.03] text-slate-400 hover:border-sky-400/40 hover:text-sky-400 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-400">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      </a>
+      <a href="https://in.linkedin.com/in/aniruddhsinh-jadeja-804116154" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-9 h-9 flex items-center justify-center rounded-xl border border-white/[.07] bg-white/[.03] text-slate-400 hover:border-sky-400/40 hover:text-sky-400 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://github.com/AniruddhSinh-Jadeja" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="w-9 h-9 flex items-center justify-center rounded-xl border border-white/[.07] bg-white/[.03] text-slate-400 hover:border-sky-400/40 hover:text-sky-400 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
-
 </html>
