@@ -58,6 +58,7 @@ function initAll() {
   initHeroCanvas();
   initAvatarFallback();
   initHero3D();
+  initCodeGlow();
 }
 
 /* ═══════════════════════════════════════
@@ -148,6 +149,8 @@ function initNavbar() {
    ═══════════════════════════════════════ */
 function initWordSplit() {
   document.querySelectorAll('.section-h').forEach(el => {
+    /* Skip headings that opt out (custom inner markup) */
+    if (el.hasAttribute('data-no-split')) return;
     const html = el.innerHTML;
     /* Wrap each word in a split container */
     el.innerHTML = html.replace(/(\S+)/g, (word) =>
@@ -391,7 +394,7 @@ function initMagneticButtons() {
    3D CARD TILT
    ═══════════════════════════════════════ */
 function init3DTilt() {
-  document.querySelectorAll('.project-card').forEach(card => {
+  document.querySelectorAll('.project-card, [data-tilt]').forEach(card => {
     let raf;
     card.addEventListener('mousemove', e => {
       cancelAnimationFrame(raf);
@@ -761,6 +764,25 @@ function initHero3D() {
       hero.classList.add('hero-active');
     }, { passive: true });
   }
+}
+
+/* ═══════════════════════════════════════
+   CODE WINDOW — radial glow follows cursor
+   ═══════════════════════════════════════ */
+function initCodeGlow() {
+  document.querySelectorAll('.code-window').forEach(win => {
+    let raf;
+    win.addEventListener('mousemove', e => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = win.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width)  * 100;
+        const y = ((e.clientY - r.top)  / r.height) * 100;
+        win.style.setProperty('--cgx', `${x}%`);
+        win.style.setProperty('--cgy', `${y}%`);
+      });
+    });
+  });
 }
 
 /* ── Boot ── */
