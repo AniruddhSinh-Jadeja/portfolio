@@ -523,8 +523,8 @@ section {
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
+  gap: 48px;
+  align-items: center;
   margin-bottom: 56px;
 }
 .about-text p {
@@ -542,9 +542,6 @@ section {
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-  sticky: top 24px;
-  position: sticky;
-  top: 88px;
 }
 .code-titlebar {
   display: flex;
@@ -566,11 +563,12 @@ section {
 }
 .code-body {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  line-height: 1.8;
-  padding: 24px;
+  font-size: 12.5px;
+  line-height: 1.65;
+  padding: 20px 22px;
   overflow-x: auto;
   scrollbar-width: none;
+  margin: 0;
 }
 .code-body::-webkit-scrollbar { display: none; }
 .c-kw  { color: #ff79c6; }
@@ -2350,7 +2348,10 @@ body::after {
 
 .section-head {
   max-width: 760px;
-  margin-bottom: 64px;
+  margin-bottom: 40px;
+}
+.section-head .section-sub {
+  margin-bottom: 0;
 }
 
 /* Kicker row — number + rule + overline */
@@ -2358,7 +2359,7 @@ body::after {
   display: inline-flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 .section-num {
   font-family: 'JetBrains Mono', monospace;
@@ -2386,10 +2387,10 @@ body::after {
 
 /* Stacked heading with line blocks */
 .section-h-stack {
-  font-size: clamp(40px, 6.2vw, 76px);
+  font-size: clamp(40px, 5.6vw, 68px);
   letter-spacing: -2.5px;
-  line-height: 1.02;
-  margin-bottom: 20px;
+  line-height: 1.05;
+  margin-bottom: 16px;
 }
 .section-h-stack .h-line {
   display: block;
@@ -2426,12 +2427,13 @@ body::after {
 
 /* About-text footnote + tags */
 .about-footnote {
-  color: #64748b;
+  color: #94a3b8;
   font-size: 13px;
   margin-top: 24px;
   font-style: italic;
-  padding-left: 14px;
-  border-left: 2px solid rgba(56,189,248,0.3);
+  padding: 4px 0 4px 16px;
+  border-left: 3px solid rgba(56,189,248,0.6);
+  line-height: 1.7;
 }
 .about-tags {
   list-style: none;
