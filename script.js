@@ -55,6 +55,7 @@ function initAll() {
   initCounters();
   initMagneticButtons();
   init3DTilt();
+  initCardSpotlight();
   initMarquee();
   initProjectFilter();
   initContactForm();
@@ -63,7 +64,6 @@ function initAll() {
   initAvatarFallback();
   initHero3D();
   initCodeGlow();
-  initPhotoSwitcher();
 }
 
 /* ═══════════════════════════════════════
@@ -426,6 +426,34 @@ function init3DTilt() {
       cancelAnimationFrame(raf);
       card.style.transform = '';
       card.style.boxShadow = '';
+    });
+  });
+}
+
+/* ═══════════════════════════════════════
+   CARD SPOTLIGHT — cursor-tracked radial glow
+   on .stat-card and .bento-card (sets --mx/--my)
+   ═══════════════════════════════════════ */
+function initCardSpotlight() {
+  const cards = document.querySelectorAll('.stat-card, .bento-card, .tl-card');
+  cards.forEach(card => {
+    if (card.dataset.spotlight) return;
+    card.dataset.spotlight = '1';
+    let raf;
+    card.addEventListener('mousemove', e => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width)  * 100;
+        const y = ((e.clientY - r.top)  / r.height) * 100;
+        card.style.setProperty('--mx', x + '%');
+        card.style.setProperty('--my', y + '%');
+      });
+    });
+    card.addEventListener('mouseleave', () => {
+      cancelAnimationFrame(raf);
+      card.style.removeProperty('--mx');
+      card.style.removeProperty('--my');
     });
   });
 }
@@ -813,31 +841,6 @@ function initCodeGlow() {
         win.style.setProperty('--cgy', `${y}%`);
       });
     });
-  });
-}
-
-/* ═══════════════════════════════════════
-   PHOTO-STYLE SWITCHER — toggle data-photo on .avatar-scene
-   ═══════════════════════════════════════ */
-function initPhotoSwitcher() {
-  const buttons = document.querySelectorAll('.photo-switcher-btn');
-  const scene   = document.querySelector('.avatar-scene');
-  if (!buttons.length || !scene) return;
-
-  /* Restore last picked mode from localStorage for nicer dev flow */
-  try {
-    const saved = localStorage.getItem('photoMode');
-    if (saved) applyMode(saved);
-  } catch (_) {}
-
-  function applyMode(mode) {
-    scene.setAttribute('data-photo', mode);
-    buttons.forEach(b => b.classList.toggle('is-active', b.dataset.photoMode === mode));
-    try { localStorage.setItem('photoMode', mode); } catch (_) {}
-  }
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => applyMode(btn.dataset.photoMode));
   });
 }
 

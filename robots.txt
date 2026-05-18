@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block dev-only paths
+Disallow: /node_modules/
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /build.js
+
+Sitemap: https://aniruddhsinh-jadeja.github.io/sitemap.xml

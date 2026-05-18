@@ -1,14 +1,5 @@
 <section id="hero-section" data-hero-3d style="padding:0;max-width:100%;margin:0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:100svh;">
 
-  <!-- Photo style switcher (temporary — pick your favorite, then ask me to remove this UI) -->
-  <div class="photo-switcher" role="tablist" aria-label="Photo style">
-    <span class="photo-switcher-label">Photo style</span>
-    <button type="button" class="photo-switcher-btn is-active" data-photo-mode="cutout">Cutout</button>
-    <button type="button" class="photo-switcher-btn" data-photo-mode="duotone">Duotone</button>
-    <button type="button" class="photo-switcher-btn" data-photo-mode="frame">Bento</button>
-    <button type="button" class="photo-switcher-btn" data-photo-mode="cover">Cover</button>
-    <button type="button" class="photo-switcher-btn" data-photo-mode="studio">Studio</button>
-  </div>
 
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-grid" aria-hidden="true"></div>
@@ -44,7 +35,7 @@
       <!-- Big animated name -->
       <h1 class="hero-name">
         <span class="hero-first">AniruddhSinh</span>
-        <span class="hero-last" data-glitch="Jadeja">Jadeja</span>
+        <span class="hero-last">Jadeja</span>
       </h1>
 
       <!-- One-liner -->
@@ -111,51 +102,21 @@
            "portrait" → full-body cutout (uses assets/me-cutout.png, bg removed)
     -->
     <div class="hero-avatar-col">
-      <div class="avatar-scene" data-mode="portrait" data-photo="cutout" data-tilt-3d>
-        <!-- Studio neon cone light (only visible in studio mode) -->
-        <div class="studio-cone" aria-hidden="true"></div>
-        <div class="studio-halo" aria-hidden="true"></div>
-        <div class="studio-floor" aria-hidden="true"></div>
-
-        <!-- Bento frame border (only visible in frame mode) -->
-        <div class="bento-frame" aria-hidden="true"></div>
-
-        <!-- Magazine cover overlay (only visible in cover mode) -->
-        <div class="cover-name" aria-hidden="true">
-          <span class="cover-line1">ANIRUDDHSINH</span>
-          <span class="cover-line2">JADEJA</span>
-        </div>
-
-        <!-- Duotone color layer (only visible in duotone mode) -->
-        <div class="duotone-layer" aria-hidden="true"></div>
-
+      <div class="avatar-scene" data-mode="portrait" data-photo="natural">
+        <!-- Soft atmospheric glow behind the silhouette -->
         <div class="avatar-aura" aria-hidden="true"></div>
-        <div class="avatar-ring-outer" aria-hidden="true"></div>
-        <div class="avatar-ring-spin" aria-hidden="true"></div>
 
-        <!-- Circle mode: cropped headshot -->
-        <div class="avatar-frame">
-          <img src="assets/avatar.jpg" alt="AniruddhSinh Jadeja" class="avatar-img"
-               onerror="this.style.display='none';document.getElementById('avatar-fallback').style.display='flex'">
-          <div id="avatar-fallback" class="avatar-monogram" style="display:none;">
-            <div class="avatar-code">
-              <span class="c-dim">&lt;</span><span class="c-cl">dev</span><span class="c-dim">&gt;</span>
-              <span class="avatar-initials">AJ</span>
-              <span class="c-dim">&lt;/</span><span class="c-cl">dev</span><span class="c-dim">&gt;</span>
-            </div>
-          </div>
-          <div class="avatar-scanline" aria-hidden="true"></div>
+        <!-- The portrait itself — real colors, no filter -->
+        <div class="avatar-portrait" role="img" aria-label="AniruddhSinh Jadeja"></div>
+
+        <!-- Press credential pinned near the lapel -->
+        <div class="press-credential" aria-hidden="true">
+          <span class="press-dot"></span>
+          <span>ARCHITECT</span>
+          <span class="press-id">/ 09</span>
         </div>
 
-        <!-- Portrait mode: full-body cutout (only loaded when data-mode="portrait") -->
-        <div class="avatar-portrait" role="img" aria-label="AniruddhSinh Jadeja"></div>
-        <!-- Holographic shimmer overlay (portrait mode) -->
-        <div class="avatar-holo" aria-hidden="true"></div>
-
-        <!-- Animated scan line sweep (portrait mode) -->
-        <div class="avatar-scan-portrait" aria-hidden="true"></div>
-
-        <!-- Floating tech badges — clean dot pills -->
+        <!-- Floating tech badges around the portrait -->
         <div class="avatar-badge badge-1" aria-hidden="true">
           <span class="badge-dot" style="background:#f7df1e;box-shadow:0 0 8px #f7df1e"></span>JavaScript
         </div>

@@ -1,4 +1,12 @@
 {
+  "name": "aniruddhsinh-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AniruddhSinh Jadeja — Technical Lead portfolio (Laravel / Backend Architect)",
+  "homepage": "https://aniruddhsinh-jadeja.github.io/",
+  "scripts": {
+    "build": "node build.js"
+  },
   "dependencies": {
     "motion": "^12.38.0"
   }
