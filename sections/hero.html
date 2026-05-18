@@ -1,5 +1,15 @@
 <section id="hero-section" data-hero-3d style="padding:0;max-width:100%;margin:0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:100svh;">
 
+  <!-- Photo style switcher (temporary — pick your favorite, then ask me to remove this UI) -->
+  <div class="photo-switcher" role="tablist" aria-label="Photo style">
+    <span class="photo-switcher-label">Photo style</span>
+    <button type="button" class="photo-switcher-btn is-active" data-photo-mode="cutout">Cutout</button>
+    <button type="button" class="photo-switcher-btn" data-photo-mode="duotone">Duotone</button>
+    <button type="button" class="photo-switcher-btn" data-photo-mode="frame">Bento</button>
+    <button type="button" class="photo-switcher-btn" data-photo-mode="cover">Cover</button>
+    <button type="button" class="photo-switcher-btn" data-photo-mode="studio">Studio</button>
+  </div>
+
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-spotlight" aria-hidden="true"></div>
@@ -101,7 +111,24 @@
            "portrait" → full-body cutout (uses assets/me-cutout.png, bg removed)
     -->
     <div class="hero-avatar-col">
-      <div class="avatar-scene" data-mode="portrait" data-tilt-3d>
+      <div class="avatar-scene" data-mode="portrait" data-photo="cutout" data-tilt-3d>
+        <!-- Studio neon cone light (only visible in studio mode) -->
+        <div class="studio-cone" aria-hidden="true"></div>
+        <div class="studio-halo" aria-hidden="true"></div>
+        <div class="studio-floor" aria-hidden="true"></div>
+
+        <!-- Bento frame border (only visible in frame mode) -->
+        <div class="bento-frame" aria-hidden="true"></div>
+
+        <!-- Magazine cover overlay (only visible in cover mode) -->
+        <div class="cover-name" aria-hidden="true">
+          <span class="cover-line1">ANIRUDDHSINH</span>
+          <span class="cover-line2">JADEJA</span>
+        </div>
+
+        <!-- Duotone color layer (only visible in duotone mode) -->
+        <div class="duotone-layer" aria-hidden="true"></div>
+
         <div class="avatar-aura" aria-hidden="true"></div>
         <div class="avatar-ring-outer" aria-hidden="true"></div>
         <div class="avatar-ring-spin" aria-hidden="true"></div>

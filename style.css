@@ -1628,10 +1628,10 @@ body::after {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 64px;
+  grid-template-columns: minmax(0, 1fr) 480px;
+  gap: 56px;
   align-items: center;
-  max-width: 1140px;
+  max-width: 1240px;
   width: 100%;
   padding: 0 24px;
   margin: 0 auto;
@@ -1742,9 +1742,13 @@ body::after {
 }
 .hero-last {
   display: block;
-  color: var(--text);
-  /* Subtle text-stroke outline effect */
-  -webkit-text-stroke: 1px rgba(255,255,255,0.08);
+  /* Bright outline letterforms — clearly visible against dark bg */
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(248,250,252,0.88);
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 22px rgba(56,189,248,0.18),
+    0 0 40px rgba(192,132,252,0.10);
 }
 
 /* ── Hero tagline ── */
@@ -2723,6 +2727,301 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   body::after { animation: none; }
 }
+
+/* ═══════════════════════════════════════
+   PHOTO-STYLE SWITCHER (temporary demo UI)
+   ═══════════════════════════════════════ */
+.photo-switcher {
+  position: absolute;
+  top: 88px;
+  right: 24px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 100px;
+  background: rgba(11,18,32,0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  font-family: 'JetBrains Mono', monospace;
+}
+.photo-switcher-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  padding: 0 10px;
+  white-space: nowrap;
+}
+.photo-switcher-btn {
+  appearance: none;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 7px 12px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out-expo);
+}
+.photo-switcher-btn:hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.04);
+}
+.photo-switcher-btn.is-active {
+  background: linear-gradient(135deg, rgba(56,189,248,0.2), rgba(192,132,252,0.2));
+  border-color: rgba(56,189,248,0.4);
+  color: var(--text);
+  box-shadow: 0 0 16px rgba(56,189,248,0.3);
+}
+@media (max-width: 900px) {
+  .photo-switcher { top: 76px; right: 12px; padding: 4px; }
+  .photo-switcher-label { display: none; }
+  .photo-switcher-btn { padding: 5px 9px; font-size: 10px; }
+}
+
+/* ═══════════════════════════════════════
+   PHOTO STYLE VARIANTS
+   data-photo on .avatar-scene controls visibility of variant layers
+   ═══════════════════════════════════════ */
+
+/* Hide all variant-specific elements by default */
+.studio-cone, .studio-halo, .studio-floor,
+.bento-frame, .cover-name, .duotone-layer {
+  display: none;
+}
+
+/* ─── 1. CUTOUT (default — current setup) ─── */
+/* No variant elements shown. Holo + scan + rim + aura active. */
+
+/* ─── 2. DUOTONE — apply cyan/violet color shift to the photo ─── */
+.avatar-scene[data-photo="duotone"] .avatar-portrait {
+  filter:
+    grayscale(1) contrast(1.05) brightness(0.9)
+    drop-shadow(0 0 1px rgba(56,189,248,0.9))
+    drop-shadow(0 30px 50px rgba(0,0,0,0.6))
+    drop-shadow(0 0 36px rgba(56,189,248,0.25));
+}
+.avatar-scene[data-photo="duotone"] .duotone-layer {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(135deg,
+    #38bdf8 0%,
+    #818cf8 50%,
+    #c084fc 100%);
+  mix-blend-mode: color;
+  mask-image: url('assets/me-cutout.png');
+  mask-repeat: no-repeat;
+  mask-position: bottom center;
+  mask-size: contain;
+  -webkit-mask-image: url('assets/me-cutout.png');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: bottom center;
+  -webkit-mask-size: contain;
+  opacity: 0.85;
+  animation: duotoneShift 8s ease-in-out infinite;
+}
+@keyframes duotoneShift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50%      { filter: hue-rotate(40deg); }
+}
+.avatar-scene[data-photo="duotone"] .avatar-holo,
+.avatar-scene[data-photo="duotone"] .avatar-scan-portrait { display: none; }
+
+/* ─── 3. FRAME (Bento) — clean glass card around photo ─── */
+.avatar-scene[data-photo="frame"] {
+  width: 420px;
+  height: 540px;
+}
+.avatar-scene[data-photo="frame"] .bento-frame {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(20,30,50,0.7), rgba(15,22,40,0.4)),
+    radial-gradient(ellipse at top, rgba(56,189,248,0.18), transparent 60%);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 30px 80px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(56,189,248,0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+.avatar-scene[data-photo="frame"] .bento-frame::before {
+  /* Conic gradient border glow */
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    transparent, #38bdf8, transparent, #818cf8, transparent, #c084fc, transparent
+  );
+  filter: blur(10px);
+  opacity: 0.5;
+  z-index: -1;
+  animation: bentoRotate 12s linear infinite;
+}
+@keyframes bentoRotate { to { transform: rotate(360deg); } }
+.avatar-scene[data-photo="frame"] .avatar-portrait {
+  width: 92%;
+  height: 92%;
+  margin: 4%;
+  position: absolute;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+}
+.avatar-scene[data-photo="frame"] .avatar-aura,
+.avatar-scene[data-photo="frame"] .avatar-holo,
+.avatar-scene[data-photo="frame"] .avatar-scan-portrait { display: none; }
+.avatar-scene[data-photo="frame"]::after { display: none; }
+
+/* ─── 4. COVER — magazine-style with name overlay ─── */
+.avatar-scene[data-photo="cover"] {
+  width: 460px;
+  height: 620px;
+}
+.avatar-scene[data-photo="cover"] .cover-name {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  z-index: 10;
+  padding: 0 24px;
+  pointer-events: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  text-align: center;
+}
+.cover-line1 {
+  font-size: 38px;
+  letter-spacing: 4px;
+  background: linear-gradient(120deg, #38bdf8, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 20px rgba(56,189,248,0.3);
+}
+.cover-line2 {
+  font-size: 76px;
+  letter-spacing: 6px;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255,255,255,0.9);
+  -webkit-text-fill-color: transparent;
+  line-height: 0.9;
+}
+.avatar-scene[data-photo="cover"] {
+  background:
+    linear-gradient(180deg,
+      transparent 0%, transparent 50%,
+      rgba(11,18,32,0.4) 75%,
+      rgba(11,18,32,0.85) 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.avatar-scene[data-photo="cover"] .avatar-portrait {
+  filter: drop-shadow(0 0 1px rgba(56,189,248,0.6)) drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+}
+.avatar-scene[data-photo="cover"] .avatar-aura { opacity: 0.4; }
+.avatar-scene[data-photo="cover"] .avatar-holo,
+.avatar-scene[data-photo="cover"] .avatar-scan-portrait { opacity: 0.5; }
+.avatar-scene[data-photo="cover"]::after { display: none; }
+
+/* ─── 5. STUDIO — neon spotlight with cone + halo + floor reflection ─── */
+.avatar-scene[data-photo="studio"] .studio-cone {
+  display: block;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  width: 280px;
+  height: 320px;
+  z-index: 0;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg,
+    rgba(56,189,248,0.35) 0%,
+    rgba(56,189,248,0.18) 30%,
+    rgba(192,132,252,0.10) 55%,
+    transparent 100%);
+  clip-path: polygon(40% 0, 60% 0, 95% 100%, 5% 100%);
+  filter: blur(10px);
+  animation: coneFlicker 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes coneFlicker {
+  0%, 100% { opacity: 0.85; }
+  50%      { opacity: 1; }
+}
+.avatar-scene[data-photo="studio"] .studio-halo {
+  display: block;
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  width: 380px;
+  height: 380px;
+  z-index: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    conic-gradient(from 0deg,
+      transparent 0deg,
+      rgba(56,189,248,0.4) 60deg,
+      rgba(129,140,248,0.4) 180deg,
+      rgba(192,132,252,0.4) 300deg,
+      transparent 360deg);
+  filter: blur(14px);
+  animation: haloSpin 10s linear infinite;
+  pointer-events: none;
+  mask: radial-gradient(circle, transparent 45%, black 50%, black 65%, transparent 72%);
+  -webkit-mask: radial-gradient(circle, transparent 45%, black 50%, black 65%, transparent 72%);
+}
+@keyframes haloSpin { to { transform: translateX(-50%) rotate(360deg); } }
+.avatar-scene[data-photo="studio"] .studio-floor {
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: -90px;
+  width: 90%;
+  height: 90px;
+  z-index: 0;
+  transform: translateX(-50%) scaleY(-1);
+  background-image: url('assets/me-cutout.png');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: contain;
+  opacity: 0.18;
+  filter: blur(2px) saturate(0.5);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+  pointer-events: none;
+}
+.avatar-scene[data-photo="studio"] .avatar-portrait {
+  filter:
+    drop-shadow(0 0 2px rgba(56,189,248,1))
+    drop-shadow(-2px 0 0 rgba(192,132,252,0.7))
+    drop-shadow(2px 0 0 rgba(56,189,248,0.7))
+    drop-shadow(0 0 50px rgba(56,189,248,0.5));
+  position: relative;
+  z-index: 2;
+}
+.avatar-scene[data-photo="studio"] .avatar-aura { opacity: 0.5; }
+.avatar-scene[data-photo="studio"]::after { display: none; }
 
 /* ═══════════════════════════════════════
    ABOUT SECTION — refined header + code window 3D

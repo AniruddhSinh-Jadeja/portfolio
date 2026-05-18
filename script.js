@@ -63,6 +63,7 @@ function initAll() {
   initAvatarFallback();
   initHero3D();
   initCodeGlow();
+  initPhotoSwitcher();
 }
 
 /* ═══════════════════════════════════════
@@ -812,6 +813,31 @@ function initCodeGlow() {
         win.style.setProperty('--cgy', `${y}%`);
       });
     });
+  });
+}
+
+/* ═══════════════════════════════════════
+   PHOTO-STYLE SWITCHER — toggle data-photo on .avatar-scene
+   ═══════════════════════════════════════ */
+function initPhotoSwitcher() {
+  const buttons = document.querySelectorAll('.photo-switcher-btn');
+  const scene   = document.querySelector('.avatar-scene');
+  if (!buttons.length || !scene) return;
+
+  /* Restore last picked mode from localStorage for nicer dev flow */
+  try {
+    const saved = localStorage.getItem('photoMode');
+    if (saved) applyMode(saved);
+  } catch (_) {}
+
+  function applyMode(mode) {
+    scene.setAttribute('data-photo', mode);
+    buttons.forEach(b => b.classList.toggle('is-active', b.dataset.photoMode === mode));
+    try { localStorage.setItem('photoMode', mode); } catch (_) {}
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => applyMode(btn.dataset.photoMode));
   });
 }
 
