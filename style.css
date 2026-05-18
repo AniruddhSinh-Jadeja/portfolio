@@ -2141,4 +2141,206 @@ body::after {
   .btn-glass::after { display: none; }
   body, a, button, [data-magnetic], .project-card { cursor: auto; }
   body::before { animation: none; }
+  .hero-spotlight, .hero-shape { display: none !important; }
+  [data-tilt-3d] { transform: none !important; }
 }
+
+/* ═══════════════════════════════════════
+   HERO 3D ENHANCEMENTS — trending effects
+   ═══════════════════════════════════════ */
+
+/* Cursor-follow spotlight (radial aurora) */
+.hero-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    520px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(56, 189, 248, 0.18) 0%,
+    rgba(129, 140, 248, 0.10) 28%,
+    rgba(192, 132, 252, 0.06) 50%,
+    transparent 72%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+#hero-section:hover .hero-spotlight,
+#hero-section.hero-active .hero-spotlight {
+  opacity: 1;
+}
+
+/* Floating 3D wireframe primitives */
+.hero-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  perspective: 900px;
+}
+.hero-shape {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  opacity: 0.18;
+  color: var(--accent);
+  filter: drop-shadow(0 0 12px rgba(56,189,248,0.35));
+  animation: shape3d 18s linear infinite;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.shape-cube {
+  top: 14%;
+  left: 8%;
+  color: #38bdf8;
+  animation-duration: 22s;
+}
+.shape-ring {
+  top: 62%;
+  left: 6%;
+  width: 110px;
+  height: 110px;
+  color: #c084fc;
+  animation-duration: 26s;
+  animation-direction: reverse;
+}
+.shape-tri {
+  top: 18%;
+  right: 6%;
+  width: 80px;
+  height: 80px;
+  color: #818cf8;
+  animation-duration: 20s;
+}
+@keyframes shape3d {
+  0%   { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(0); }
+  25%  { transform: rotateX(90deg) rotateY(45deg) rotateZ(15deg) translateY(-18px); }
+  50%  { transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg) translateY(0); }
+  75%  { transform: rotateX(270deg) rotateY(315deg) rotateZ(-15deg) translateY(18px); }
+  100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(0deg) translateY(0); }
+}
+@media (max-width: 900px) {
+  .hero-shape { display: none; }
+}
+
+/* 3D layered text-shadow on hero name (chromatic depth) */
+.hero-first {
+  text-shadow:
+    1px 1px 0 rgba(56,189,248,0.18),
+    2px 2px 0 rgba(129,140,248,0.14),
+    3px 3px 0 rgba(192,132,252,0.10),
+    4px 4px 12px rgba(56,189,248,0.25);
+}
+.hero-last {
+  position: relative;
+  text-shadow:
+    1px 1px 0 rgba(255,255,255,0.04),
+    2px 2px 0 rgba(255,255,255,0.03),
+    3px 3px 18px rgba(56,189,248,0.12);
+}
+
+/* Glitch hover on Jadeja */
+.hero-last[data-glitch]::before,
+.hero-last[data-glitch]::after {
+  content: attr(data-glitch);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  -webkit-text-fill-color: currentColor;
+  -webkit-text-stroke: 0;
+}
+.hero-last[data-glitch]::before { color: #38bdf8; text-shadow: 2px 0 #38bdf8; clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); }
+.hero-last[data-glitch]::after  { color: #f0abfc; text-shadow: -2px 0 #f0abfc; clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); }
+.hero-name:hover .hero-last[data-glitch]::before { opacity: 0.9; animation: glitchA 0.45s steps(2) infinite; }
+.hero-name:hover .hero-last[data-glitch]::after  { opacity: 0.9; animation: glitchB 0.45s steps(2) infinite; }
+@keyframes glitchA {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-3px, 1px); }
+  50%  { transform: translate(2px, -1px); }
+  75%  { transform: translate(-1px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes glitchB {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(3px, -1px); }
+  50%  { transform: translate(-2px, 1px); }
+  75%  { transform: translate(1px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Mouse-tracked 3D tilt on avatar scene */
+.hero-avatar-col {
+  perspective: 1200px;
+}
+[data-tilt-3d] {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
+}
+[data-tilt-3d] .avatar-frame,
+[data-tilt-3d] .avatar-ring-spin,
+[data-tilt-3d] .avatar-ring-outer {
+  transform-style: preserve-3d;
+}
+/* Glass refraction sweep across avatar */
+.avatar-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255,255,255,0.10) 48%,
+    rgba(255,255,255,0.18) 50%,
+    rgba(255,255,255,0.10) 52%,
+    transparent 65%
+  );
+  pointer-events: none;
+  animation: refractSweep 5.5s ease-in-out infinite;
+  mix-blend-mode: overlay;
+}
+@keyframes refractSweep {
+  0%   { transform: translateX(-120%) skewX(-12deg); opacity: 0; }
+  35%  { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { transform: translateX(120%) skewX(-12deg); opacity: 0; }
+}
+
+/* Badges depth on parallax */
+.avatar-badge {
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s ease;
+}
+[data-tilt-3d]:hover .avatar-badge {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    0 8px 28px rgba(56,189,248,0.25),
+    0 2px 8px rgba(0,0,0,0.4);
+}
+.avatar-badge:hover {
+  transform: translateY(-4px) translateZ(40px) scale(1.08);
+  background: rgba(56,189,248,0.18);
+  border-color: rgba(56,189,248,0.45);
+}
+
+/* 3D depth lift on stat cards & status badge */
+.hero-stat,
+.status-badge {
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease, border-color 0.3s ease;
+  transform-style: preserve-3d;
+}
+.hero-stat:hover {
+  transform: translateY(-4px) translateZ(20px);
+}
+.hero-stat:hover .hero-stat-num {
+  text-shadow: 0 8px 24px rgba(56,189,248,0.45);
+}
+.status-badge:hover {
+  transform: translateY(-2px) translateZ(15px);
+  border-color: rgba(34,197,94,0.5);
+  box-shadow: 0 8px 24px rgba(34,197,94,0.18);
+}
+

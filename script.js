@@ -57,6 +57,7 @@ function initAll() {
   initMobileMenu();
   initHeroCanvas();
   initAvatarFallback();
+  initHero3D();
 }
 
 /* ═══════════════════════════════════════
@@ -689,6 +690,76 @@ function initAvatarFallback() {
   if (!img.complete || img.naturalWidth === 0) {
     img.style.display = 'none';
     fallback.style.display = 'flex';
+  }
+}
+
+/* ═══════════════════════════════════════
+   HERO 3D — mouse-tracked tilt, spotlight, parallax depth
+   ═══════════════════════════════════════ */
+function initHero3D() {
+  const hero = document.getElementById('hero-section');
+  if (!hero) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const tilt = hero.querySelector('[data-tilt-3d]');
+  let raf;
+  let active = false;
+
+  /* Track normalized mouse pos: -1 to +1 on each axis, plus % for spotlight */
+  function onMove(e) {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const r = hero.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      const nx = (x / r.width)  * 2 - 1;  /* -1 .. 1 */
+      const ny = (y / r.height) * 2 - 1;
+
+      /* Spotlight in % */
+      hero.style.setProperty('--mx', `${(x / r.width)  * 100}%`);
+      hero.style.setProperty('--my', `${(y / r.height) * 100}%`);
+
+      /* Parallax driver for orbs / shapes (consumed via CSS calc) */
+      hero.style.setProperty('--px', nx.toFixed(3));
+      hero.style.setProperty('--py', ny.toFixed(3));
+
+      /* 3D tilt on avatar scene — clamp range */
+      if (tilt) {
+        const rotY = nx *  10;   /* left-right */
+        const rotX = ny * -10;   /* up-down (inverted feels natural) */
+        tilt.style.transform =
+          `rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) translateZ(0)`;
+      }
+
+      if (!active) {
+        hero.classList.add('hero-active');
+        active = true;
+      }
+    });
+  }
+
+  function onLeave() {
+    cancelAnimationFrame(raf);
+    hero.style.setProperty('--px', '0');
+    hero.style.setProperty('--py', '0');
+    if (tilt) tilt.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0)';
+    /* Keep spotlight visible briefly then fade via class removal */
+    hero.classList.remove('hero-active');
+    active = false;
+  }
+
+  hero.addEventListener('mousemove', onMove);
+  hero.addEventListener('mouseleave', onLeave);
+
+  /* Device-orientation fallback for touch — subtle tilt from device gyroscope */
+  if (window.DeviceOrientationEvent && 'ontouchstart' in window) {
+    window.addEventListener('deviceorientation', e => {
+      const nx = Math.max(-1, Math.min(1, (e.gamma || 0) / 45));
+      const ny = Math.max(-1, Math.min(1, (e.beta  || 0) / 90));
+      hero.style.setProperty('--px', nx.toFixed(3));
+      hero.style.setProperty('--py', ny.toFixed(3));
+      hero.classList.add('hero-active');
+    }, { passive: true });
   }
 }
 
