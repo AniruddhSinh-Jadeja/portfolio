@@ -89,13 +89,24 @@ function smoothScrollTo(targetY, duration = 900) {
   const diff     = targetY - startY;
   const startTime = performance.now();
 
+  /* Temporarily disable CSS scroll-behavior so each rAF write is instant —
+     otherwise the browser tries to animate every intermediate scrollTo() call
+     against our per-frame target and the scroll jerks. */
+  const html = document.documentElement;
+  const prevBehavior = html.style.scrollBehavior;
+  html.style.scrollBehavior = 'auto';
+
   function step(now) {
     const elapsed  = now - startTime;
     const progress = Math.min(elapsed / duration, 1);
     /* Expo ease-out — feels physical */
     const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-    window.scrollTo(0, startY + diff * eased);
-    if (progress < 1) requestAnimationFrame(step);
+    window.scrollTo({ left: 0, top: startY + diff * eased, behavior: 'instant' });
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      html.style.scrollBehavior = prevBehavior;
+    }
   }
   requestAnimationFrame(step);
 }

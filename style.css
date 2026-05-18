@@ -81,12 +81,6 @@ body {
 }
 body.loaded { opacity: 1; }
 
-/* Sections fade-up subtly after load for creamy entrance */
-body:not(.loaded) main > * { transform: translateY(8px); }
-main > * {
-  transition: transform 0.9s var(--ease-out-expo);
-}
-
 /* Smooth-scroll polish */
 html {
   scroll-padding-top: var(--nav-h);
