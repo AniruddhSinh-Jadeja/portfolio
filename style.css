@@ -2394,6 +2394,115 @@ body::after {
 }
 
 /* ═══════════════════════════════════════
+   AVATAR — circle + portrait modes
+   ═══════════════════════════════════════ */
+
+/* Pulsing aura behind any mode */
+.avatar-aura {
+  position: absolute;
+  inset: -60px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(56,189,248,0.18) 0%, transparent 55%),
+    radial-gradient(circle at 30% 70%, rgba(192,132,252,0.12) 0%, transparent 50%),
+    radial-gradient(circle at 70% 30%, rgba(129,140,248,0.14) 0%, transparent 50%);
+  filter: blur(28px);
+  opacity: 0.85;
+  z-index: 0;
+  animation: auraPulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes auraPulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+  50%      { transform: scale(1.08) rotate(180deg); opacity: 1; }
+}
+
+/* ── Mode toggle ───────────────────────── */
+
+/* Default: circle mode */
+.avatar-scene[data-mode="circle"] .avatar-portrait { display: none; }
+
+/* Portrait mode: hide circle frame + rings, show cutout */
+.avatar-scene[data-mode="portrait"] .avatar-frame,
+.avatar-scene[data-mode="portrait"] .avatar-ring-outer,
+.avatar-scene[data-mode="portrait"] .avatar-ring-spin {
+  display: none;
+}
+.avatar-scene[data-mode="portrait"] {
+  width: 360px;
+  height: 460px;
+}
+.avatar-scene[data-mode="portrait"] .avatar-aura {
+  inset: -30px -10px -10px -10px;
+  border-radius: 40% 40% 8% 8%;
+}
+
+/* Portrait container — uses background-image so unused asset doesn't load in circle mode */
+.avatar-portrait {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/me-cutout.png');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: contain;
+  /* Fade the bottom edge into the page */
+  mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+  filter: drop-shadow(0 24px 40px rgba(0,0,0,0.55))
+          drop-shadow(0 0 30px rgba(56,189,248,0.18));
+  animation: portraitFloat 7s ease-in-out infinite;
+  transition: filter 0.5s ease;
+}
+@keyframes portraitFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+.avatar-scene[data-mode="portrait"]:hover .avatar-portrait {
+  filter: drop-shadow(0 28px 50px rgba(0,0,0,0.6))
+          drop-shadow(0 0 40px rgba(56,189,248,0.35));
+}
+
+/* Entrance — iris reveal on first visible */
+.avatar-scene .avatar-frame {
+  animation:
+    avatarFloat 6s ease-in-out infinite,
+    avatarIrisIn 1.2s cubic-bezier(0.22,1,0.36,1) 0.2s both;
+}
+@keyframes avatarIrisIn {
+  0%   { clip-path: circle(0% at 50% 50%); filter: blur(8px); }
+  60%  { filter: blur(2px); }
+  100% { clip-path: circle(60% at 50% 50%); filter: blur(0); }
+}
+
+/* Portrait entrance — scale + fade up */
+.avatar-portrait {
+  animation:
+    portraitFloat 7s ease-in-out infinite,
+    portraitIn 1.1s cubic-bezier(0.22,1,0.36,1) 0.2s both;
+}
+@keyframes portraitIn {
+  0%   { opacity: 0; transform: translateY(32px) scale(0.96); filter: blur(8px) drop-shadow(0 24px 40px rgba(0,0,0,0.55)); }
+  100% { opacity: 1; transform: translateY(0)   scale(1);    filter: blur(0)   drop-shadow(0 24px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 30px rgba(56,189,248,0.18)); }
+}
+
+/* Adjust badge positions for portrait mode (taller frame) */
+.avatar-scene[data-mode="portrait"] .badge-1 { top: 30px;   left: -40px; }
+.avatar-scene[data-mode="portrait"] .badge-2 { top: 110px;  right: -50px; }
+.avatar-scene[data-mode="portrait"] .badge-3 { top: 220px;  right: -38px; }
+.avatar-scene[data-mode="portrait"] .badge-4 { bottom: 140px; left: -40px; }
+.avatar-scene[data-mode="portrait"] .badge-5 { top: auto; bottom: 60px; left: -52px; transform: translateY(0); }
+
+/* Smaller portrait on narrow screens */
+@media (max-width: 1024px) {
+  .avatar-scene[data-mode="portrait"] { width: 300px; height: 380px; }
+}
+@media (max-width: 768px) {
+  .avatar-scene[data-mode="portrait"] { width: 240px; height: 320px; }
+}
+
+/* ═══════════════════════════════════════
    ABOUT SECTION — refined header + code window 3D
    ═══════════════════════════════════════ */
 
