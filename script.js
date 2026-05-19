@@ -4,6 +4,10 @@
 
 /* ── Section loader ── */
 async function loadSections() {
+  /* Safety net: even if fetch hangs on a slow mobile connection,
+     force the page visible after 2.5s so the user never sees a white screen */
+  const failSafe = setTimeout(() => document.body.classList.add('loaded'), 2500);
+
   const mounts = document.querySelectorAll('[data-section]');
   const loads = Array.from(mounts).map(async el => {
     const name = el.dataset.section;
@@ -17,6 +21,7 @@ async function loadSections() {
   });
   await Promise.all(loads);
   initAll();
+  clearTimeout(failSafe);
   /* Trigger creamy page fade-in once everything is wired */
   requestAnimationFrame(() => {
     requestAnimationFrame(() => document.body.classList.add('loaded'));

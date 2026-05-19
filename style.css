@@ -35,6 +35,9 @@ html {
   scroll-behavior: smooth;
   color-scheme: dark;
   font-size: 16px;
+  /* Match body bg so the fade-in doesn't expose a white html background
+     on slow connections or if JS hasn't toggled body.loaded yet */
+  background: #060c18;
 
   /* Firefox scrollbar */
   scrollbar-width: thin;
@@ -2198,9 +2201,15 @@ body::after {
   font-size: clamp(52px, 8vw, 92px);
   letter-spacing: -4px;
   line-height: 0.95;
-  margin-bottom: 18px;
+  /* Add breathing room before the tagline */
+  margin-bottom: 36px;
   opacity: 0;
   animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.3s both;
+}
+.hero-name .hero-last {
+  /* Pad the bottom of the surname so the descender of 'J' doesn't kiss
+     the tagline below — works alongside .hero-name margin-bottom */
+  padding-bottom: 8px;
 }
 .hero-first {
   display: block;
@@ -2259,14 +2268,21 @@ body::after {
 }
 
 /* ── Hero sub ── */
+.hero-text .hero-sub,
 .hero-sub {
   color: var(--muted);
   font-size: 15px;
   line-height: 1.8;
-  margin-bottom: 28px;
+  /* Reset the auto left/right from the older .hero-sub rule above
+     so the description stays left-aligned with the rest of the column */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 28px !important;
   max-width: 460px;
   opacity: 0;
   animation: fadeUp 0.5s ease 0.62s both;
+  text-align: left !important;
 }
 
 /* ── Stats strip ── */
