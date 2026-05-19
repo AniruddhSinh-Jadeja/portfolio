@@ -2703,7 +2703,13 @@ body::after {
   .hero-sub, .hero-tagline { max-width: 100%; }
   .hero-stats { justify-content: center; }
   .hero-terminal { justify-content: center; }
-  .hero-avatar-col { transform: none; }
+  /* Force visible on mobile regardless of JS reveal state — otherwise
+     the photo section stays invisible if JS is slow or blocked */
+  .hero-avatar-col {
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
   .avatar-scene { width: 240px; height: 240px; }
   .avatar-frame { width: 220px; height: 220px; }
   .hero-socials { justify-content: center; }
