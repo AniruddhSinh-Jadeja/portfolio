@@ -2709,9 +2709,59 @@ body::after {
     transform: none !important;
     opacity: 1 !important;
     visibility: visible !important;
+    display: flex !important;
   }
   .avatar-scene { width: 240px; height: 240px; }
   .avatar-frame { width: 220px; height: 220px; }
+
+  /* Bulletproof mobile photo — strip ALL effects that iOS Safari can break */
+  .avatar-scene[data-mode="portrait"] {
+    width: 280px !important;
+    height: 360px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+  }
+  .avatar-portrait {
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    animation: none !important;
+    background-image: none !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    filter: none !important;
+  }
+  .avatar-portrait-img {
+    display: block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: bottom center !important;
+    /* No mask, no filter — just the image */
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    filter: drop-shadow(0 16px 30px rgba(0,0,0,0.5)) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  /* Kill mobile-breaking decorative layers */
+  .avatar-aura,
+  .press-credential,
+  .hero-shapes,
+  .avatar-badge {
+    display: none !important;
+  }
+  .avatar-scene::after { display: none !important; }
   .hero-socials { justify-content: center; }
   .badge-1 { top: -12px; left: -10px; }
   .badge-2 { right: -20px; }
