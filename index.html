@@ -74,7 +74,60 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260518g">
+  <link rel="stylesheet" href="style.css?v=20260518h">
+
+  <!-- Critical mobile photo styles - inline so iOS Safari can't cache an old version -->
+  <style>
+    @media (max-width: 768px) {
+      .hero-avatar-col {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        display: flex !important;
+        justify-content: center !important;
+      }
+      .avatar-scene[data-mode="portrait"] {
+        width: 280px !important;
+        height: 360px !important;
+        opacity: 1 !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        position: relative !important;
+      }
+      .avatar-portrait {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        background: none !important;
+        mask: none !important;
+        -webkit-mask: none !important;
+        filter: none !important;
+        animation: none !important;
+        opacity: 1 !important;
+      }
+      .avatar-portrait-img {
+        display: block !important;
+        width: auto !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        max-height: 360px !important;
+        object-fit: contain !important;
+        object-position: bottom center !important;
+        mask: none !important;
+        -webkit-mask: none !important;
+        filter: drop-shadow(0 16px 30px rgba(0,0,0,0.5)) !important;
+        opacity: 1 !important;
+      }
+      .avatar-aura,
+      .press-credential,
+      .hero-shapes,
+      .avatar-badge,
+      .avatar-scene::after { display: none !important; }
+    }
+  </style>
 </head>
 <body>
 
